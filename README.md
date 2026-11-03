@@ -1,19 +1,20 @@
 # 3AM Shinjitsu (真実) — Speed-First Red-Team Mandate
 
-**Version:** 1.3.0
+**Version:** 1.5.0
 **Platform:** Linux (any OpenAI-compatible endpoint)
 **Family:** HolyShit mandate family — general doctrine: [HolyShit!](https://github.com/xanstomper/HolyShit)
 
 ---
 
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ______ ___    __  ___     ///  3 A M  ·  S H I N J I T S U  [ 真実 ]
-  /___  //   |  /  |/  /     SPEED-FIRST OFFENSIVE RED-TEAM MANDATE
-   __/ // /| | / /|_/ /      ──────────────────────────────────────────────
-  /__ // ___ |/ /  / /       STATUS : ARMED · P0 SCOPE LOCK
-/____//_/  |_/_/  /_/         TARGET : Awaiting Target URL · Objective · RoE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+▸ 3AM SHINJITSU — TRIGGER SEQUENCE
+  ═══════════════════════════════════
+  [ OK ] mandate core loaded
+  [ OK ] scope gate armed
+  [ OK ] velocity engine online
+  ⚡ MANDATE TRIGGERED · STATUS: ARMED
+  ▁▂▃▄▅▆▇█▇▆▅▄▃▂▁
+  ─ waiting P0: target · objective · authorization
 ```
 
 Named for the hour real breaches detonate and for 真実 (*shinjitsu*, "truth"): the verdict is
