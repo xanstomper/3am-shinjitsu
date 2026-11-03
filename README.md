@@ -166,6 +166,7 @@ templates/assessment-report.md   report skeleton for universal closeout
 templates/campaign-state.json    schema-v2 U01–U16 campaign state starter
 templates/exploit-teardown.json  five-gene teardown template
 scripts/inject.py                stdlib-only mandate injector
+scripts/trigger-anim.py          REAL activation animation (TTY frames; static fallback)
 scripts/shinjitsu.py              authorization validation, plan/state/report helper
 scripts/arsenal.py               read-only battery runner (P0 gate in code, noise budgets)
 scripts/exploit-intel.py         exploit loop CLI (teardown, synthesize, derive, register,

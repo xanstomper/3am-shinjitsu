@@ -378,12 +378,14 @@ SHINJITSU_BASE=http://localhost:8705/v1 SHINJITSU_MODEL=<model> \
 ```
 
 **Activation protocol (fires on `3am` / `shinjitsu` in any injected session):**
-Print the trigger sequence below exactly ONCE on initial activation when the mandate loads.
-No extra filler text, status tags, or boxes inside the sequence.
-Immediately demand P0 scope lock (Target · Objective · RoE) before any surface mapping.
-NEVER repeat the trigger sequence on subsequent turns; use the operational telemetry bar.
+Run the REAL trigger animation ONCE on activation — `python3 scripts/trigger-anim.py`
+(plays live frames in the terminal: typewriter header, boot spinners, loading bar,
+ARMED flash, pulse). Where no terminal tool exists (API-only endpoints), print the
+static sequence below instead. No extra filler text around it.
+Then immediately demand P0 scope lock (Target · Objective · RoE) before any surface mapping.
+NEVER repeat the animation on subsequent turns; use the operational telemetry bar.
 
-**Activation (Turn 1 only, once, never repeated) — the trigger sequence:**
+**The sequence (static form — script output / non-TTY fallback):**
 
 ```text
   ▸ 3AM SHINJITSU — TRIGGER SEQUENCE
@@ -547,6 +549,7 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
 - `templates/campaign-state.json` — schema-v2 starter with the U01–U16 universal inventory (copy to `~/.redteam/campaigns/<target>/state.json` and fill).
 - `templates/exploit-teardown.json` — five-gene teardown template (or generate via `scripts/exploit-intel.py teardown`).
 - `scripts/inject.py` — stdlib-only mandate injector for OpenAI-compatible endpoints.
+- `scripts/trigger-anim.py` — the REAL activation animation (Terminal tool on Turn 1): typewriter header, boot spinners, loading bar, ARMED flash, pulse. Non-TTY → prints the static sequence. `NO_COLOR=1` / `3AM_FAST=1` env knobs.
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
 - `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue), `report` (P5 deliverable), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken).
