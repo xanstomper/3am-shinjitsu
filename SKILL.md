@@ -360,11 +360,12 @@ Two synthesis modes, one wall:
    generates its own test battery per target by combining §9 ladder outputs: design-flaw class
    × trust seam → new probe class. Every §8 class run emits synthesized probes into the ledger
    alongside the canonical oracles, each scored with §14 before running.
-   Operational battery: `references/vector-synthesis-matrix.md` (12 flaw families × 10 trust
-   seams → 36 curated probe pairs + the §R remainder rule for unlisted pairs) and the study
+   Operational battery: `references/vector-synthesis-matrix.md` (20 flaw families × 15 trust
+   seams → 59 curated probe pairs + the §R remainder rule for unlisted pairs) and the study
    protocol in `references/exploit-intelligence-engine.md` (five-gene teardown: TRIGGER /
    PRECONDITION / PRIMITIVE / IMPACT-GATE / Δ — no Δ = no test). Runner:
-   `scripts/exploit-intel.py` (teardown / synthesize / derive / register).
+   `scripts/exploit-intel.py` (teardown / synthesize / derive / register / converge / learn /
+   drift / status / next / report / promote / chain / sweep — full loop in §18).
 2. **Public-PoC reproduction (authorized scope only).** For every fingerprinted
    component+version: pull documented PoCs (searchsploit/exploit-db, nuclei templates), adapt
    minimally to the target's stack, verify against the target inside the §2 gate. "Real
@@ -548,7 +549,7 @@ new probe classes from flaw-family × trust-seam combinations.
 Protocol: `references/exploit-intelligence-engine.md` (study/breakdown/adaptation) ·
 Battery: `references/vector-synthesis-matrix.md` (flaw × seam generator) ·
 Runner: `scripts/exploit-intel.py` (teardown · synthesize · derive · register · converge ·
-learn · drift · status · next · report · promote). Matrix runtime file: `scripts/matrix.json`.
+learn · drift · status · next · report · promote · chain · sweep). Matrix runtime file: `scripts/matrix.json`.
 Load the engine file BEFORE the first battery run of any engagement — it is the layer
 that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable step.
 
@@ -599,13 +600,21 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
 - `scripts/verify_3am.py` — offline verification suite: compile, JSON, matrix sync (≥59 module==json), CLI subcommand set, art-clean (zero old block art), gate language, SKILL sections/version, skill-dir↔repo sync. Run after ANY edit: `python3 scripts/verify_3am.py` (rc 0 = all pass).
+- `scripts/stub-openai.py` — offline OpenAI-compatible stub server for testing model-calling CLIs (converge/sweep) with zero inference: modes confirm/block/mixed/garbage/ptok/ptok-drift, request counter for round-aware stubs. Run it or `import stub_openai; start_stub(mode=...)` in harnesses.
 - `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue incl. EXPAND/UNBLOCK for chains), `report` (P5 deliverable incl. takeover chains), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken), `chain` (certify A→B→C:TAKEOVER|PARTIAL|BLOCKED), `sweep --stack <fps>` (press-button: drift → auto-queue → converge → fire-list).
 - `scripts/matrix.json` — the runtime synthesis matrix (grows via `promote`; regenerated from the curated markdown when needed).
 
 ## Relations
 
 - `holyshit-mode` — the general doctrine this speed-mandate inherits from (its session-verified
-  recipes are normative here by reference).
+  recipes are normative here by reference). *The book.*
+- `kairo` — THE METAL BRANCH: offensive hardware/embedded/firmware/wireless mandate
+  (KAIRO 回路, v1.0.0). KAIRO is the depth module for 3AM universal domains U12 and
+  synthesis families 16–18. Tree: HolyShit (book) · 3AM (engine) · KAIRO (metal).
+- `shukaku` — THE HARVESTER: post-compromise catalog · price · disclose (SHUKAKU
+  収穫, v1.0.0). Consumes 3AM's CONFIRMED findings/chains and answers "what did the
+  attacker GAIN, priced." Roles: HolyShit (searcher) · 3AM (attacker) · SHUKAKU
+  (harvester).
 - `kimiko-mode` — boundaries and artifact-first intake (see kimiko-mode's redteam-artifact-intake
   and holyshit-synergy notes; cross-skill, not local files).
 - Public repo: `github.com/xanstomper/3am-shinjitsu` (local mirror `~/3am-shinjitsu`) —
