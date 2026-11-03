@@ -215,6 +215,144 @@
       "seam": "E",
       "probe": "Cross-user context poisoning write: plant directive via shared buffer",
       "confirmed_when": "directive reappears in another caller's trace"
+    },
+    {
+      "flaw": 13,
+      "seam": "K",
+      "probe": "Public bucket listing: GET bucket s3:ListObjects without creds",
+      "confirmed_when": "200 + object keys with no identity"
+    },
+    {
+      "flaw": 13,
+      "seam": "K",
+      "probe": "IAM privesc path: policy diff for AssumeRole/PassRole abuse",
+      "confirmed_when": "policy grants escalation to an owned identity"
+    },
+    {
+      "flaw": 13,
+      "seam": "H",
+      "probe": "Cross-account role assumption from staging to prod",
+      "confirmed_when": "staging identity assumes prod role"
+    },
+    {
+      "flaw": 14,
+      "seam": "M",
+      "probe": "SNMP public walk: snmpget community=public sysDescr",
+      "confirmed_when": "OID values returned without auth"
+    },
+    {
+      "flaw": 14,
+      "seam": "M",
+      "probe": "NFS export list: showmount -e; root-squash state check",
+      "confirmed_when": "world-readable export"
+    },
+    {
+      "flaw": 14,
+      "seam": "M",
+      "probe": "SMB anonymous listing: smbclient -N -L",
+      "confirmed_when": "share listing without credentials"
+    },
+    {
+      "flaw": 14,
+      "seam": "M",
+      "probe": "VNC/RDP pre-auth handshake: auth-type negotiation",
+      "confirmed_when": "None/Plain auth type accepted"
+    },
+    {
+      "flaw": 15,
+      "seam": "M",
+      "probe": "Redis anon INFO: connect :6379, INFO",
+      "confirmed_when": "server info without auth"
+    },
+    {
+      "flaw": 15,
+      "seam": "M",
+      "probe": "Elasticsearch anon: GET :9200/_cluster/health + _cat/indices",
+      "confirmed_when": "200 + index list without creds"
+    },
+    {
+      "flaw": 15,
+      "seam": "M",
+      "probe": "Mongo anon: no-auth connect, list databases (operator-owned only)",
+      "confirmed_when": "db list without credentials"
+    },
+    {
+      "flaw": 15,
+      "seam": "L",
+      "probe": "Backup exposure: web-adjacent .bak/.sql/.gz/dump paths",
+      "confirmed_when": "database dump readable unauthenticated"
+    },
+    {
+      "flaw": 16,
+      "seam": "L",
+      "probe": "Deep-link tampering: exported activity launch without permission (owned devices)",
+      "confirmed_when": "activity starts without the declaring permission"
+    },
+    {
+      "flaw": 16,
+      "seam": "L",
+      "probe": "Update-path trust: unsigned or plaintext update package inspection",
+      "confirmed_when": "tamperable update artifact"
+    },
+    {
+      "flaw": 17,
+      "seam": "L",
+      "probe": "Firmware extraction: update package -> strings/secrets (local, operator-provided)",
+      "confirmed_when": "credentials or keys inside firmware image"
+    },
+    {
+      "flaw": 17,
+      "seam": "L",
+      "probe": "Default credentials on network gear (documented vendor lists)",
+      "confirmed_when": "admin login with vendor default"
+    },
+    {
+      "flaw": 18,
+      "seam": "N",
+      "probe": "WPS PIN brute feasibility: WPS enabled + lockout absent (hardware access)",
+      "confirmed_when": "WPS active, no rate-limit state"
+    },
+    {
+      "flaw": 18,
+      "seam": "N",
+      "probe": "Open pairing/broadcast mode: device inquiry without auth",
+      "confirmed_when": "discoverable + auth-free pairing"
+    },
+    {
+      "flaw": 19,
+      "seam": "N",
+      "probe": "Unauth webhook registration/fetch: webhook URL as SSRF",
+      "confirmed_when": "registration accepts internal/link-local URL"
+    },
+    {
+      "flaw": 19,
+      "seam": "N",
+      "probe": "OAuth app over-grant: installed app requests full-tenant scopes",
+      "confirmed_when": "grant scope exceeds app requirement"
+    },
+    {
+      "flaw": 20,
+      "seam": "O",
+      "probe": "kubelet unauth: GET :10250/pods",
+      "confirmed_when": "pod list without credentials"
+    },
+    {
+      "flaw": 20,
+      "seam": "O",
+      "probe": "etcd unauth: GET :2379/version then keys (operator-owned)",
+      "confirmed_when": "keys readable without auth"
+    },
+    {
+      "flaw": 20,
+      "seam": "O",
+      "probe": "Docker socket exposure: GET :2375/containers/json",
+      "confirmed_when": "container list without auth"
+    },
+    {
+      "flaw": 20,
+      "seam": "O",
+      "probe": "Grafana/Prometheus anon: /api/status, /metrics",
+      "confirmed_when": "dashboards or metrics unauthenticated"
     }
   ],
   "updated": "2026-11-03"
