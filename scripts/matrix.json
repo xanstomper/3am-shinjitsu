@@ -1,0 +1,221 @@
+{
+  "rows": [
+    {
+      "flaw": 1,
+      "seam": "B",
+      "probe": "Mirror the client gate server-side: fire the UI-blocked action directly at the API",
+      "confirmed_when": "200/JSON on an action the UI forbids"
+    },
+    {
+      "flaw": 1,
+      "seam": "F",
+      "probe": "Callback error taxonomy: drive the callback with forged state+code",
+      "confirmed_when": "error differs from auth-order baseline"
+    },
+    {
+      "flaw": 2,
+      "seam": "C",
+      "probe": "Mass-assignment signup: inject privilege keys in data{}, read back in verified JWT",
+      "confirmed_when": "keys persist into user_metadata"
+    },
+    {
+      "flaw": 2,
+      "seam": "F",
+      "probe": "State-cookie carrier: plant {isAdmin, authRole} fields into the OAuth state cookie",
+      "confirmed_when": "server echoes them into profile"
+    },
+    {
+      "flaw": 2,
+      "seam": "E",
+      "probe": "Anon socket-token mint from public metadata, join with token-in-query",
+      "confirmed_when": "frames stream for an unauthenticated identity"
+    },
+    {
+      "flaw": 3,
+      "seam": "D",
+      "probe": "Object/array-where-string on limiter-keyed fields; 1e3 numeric coercion",
+      "confirmed_when": "counting diverges per parse"
+    },
+    {
+      "flaw": 3,
+      "seam": "C",
+      "probe": "Grant-type coercion on token endpoint: password/refresh/id_token matrix",
+      "confirmed_when": "a grant path skips a check"
+    },
+    {
+      "flaw": 3,
+      "seam": "G",
+      "probe": "22P02/PGRST-err type-oracle: wrong-typed filter per column guess",
+      "confirmed_when": "schema/type leaks via error codes"
+    },
+    {
+      "flaw": 4,
+      "seam": "A",
+      "probe": "Dual-stack split pools: repeat limiter test over IPv6 shadow surface",
+      "confirmed_when": "different budget than IPv4"
+    },
+    {
+      "flaw": 4,
+      "seam": "C",
+      "probe": "Account-vs-IP keying: one identity many IPs, many identities one IP",
+      "confirmed_when": "limiter binds the wrong axis"
+    },
+    {
+      "flaw": 4,
+      "seam": "J",
+      "probe": "Unthrottled CPU primitive: burst tokenizer/count endpoint with big bodies",
+      "confirmed_when": "zero 429, latency scales with body"
+    },
+    {
+      "flaw": 5,
+      "seam": "C",
+      "probe": "Pre-gate token mint: every privilege scope the client vocabulary names",
+      "confirmed_when": "any-scope signature accepted"
+    },
+    {
+      "flaw": 5,
+      "seam": "F",
+      "probe": "redirect_uri forwarding: authorize URL with attacker URI, watch 302 Location",
+      "confirmed_when": "URI forwarded verbatim"
+    },
+    {
+      "flaw": 5,
+      "seam": "E",
+      "probe": "Handshake != auth: full frame exchange after a clean 101",
+      "confirmed_when": "rejection only arrives on frame 2+"
+    },
+    {
+      "flaw": 6,
+      "seam": "H",
+      "probe": "Sister-brand IDOR: cross-brand numeric/ID reuse against shared backend",
+      "confirmed_when": "brand B rows served to brand A identity"
+    },
+    {
+      "flaw": 6,
+      "seam": "C",
+      "probe": "Public-id oracle: public_ids -> deeper per-ID endpoints",
+      "confirmed_when": "unauth per-user rows"
+    },
+    {
+      "flaw": 6,
+      "seam": "G",
+      "probe": "RLS-vs-function trust split: call edge function with non-privileged session",
+      "confirmed_when": "function enforces less than the DB"
+    },
+    {
+      "flaw": 7,
+      "seam": "A",
+      "probe": "Cookie-toss gadget: any param written as a domain cookie by media/attrib page",
+      "confirmed_when": "cookie lands on the main domain scope"
+    },
+    {
+      "flaw": 7,
+      "seam": "A",
+      "probe": "Origin-side ghost re-sweep: re-run route map direct-to-origin",
+      "confirmed_when": "origin-only routes appear"
+    },
+    {
+      "flaw": 7,
+      "seam": "B",
+      "probe": "Cache-keys-on-cookie: vary cache key inputs vs authed content",
+      "confirmed_when": "authed content served to no-auth fetch"
+    },
+    {
+      "flaw": 8,
+      "seam": "H",
+      "probe": "Wildcard-preview cookie scope: dangling preview hosts share parent cookie domain",
+      "confirmed_when": "cookie readable/castable via the twin"
+    },
+    {
+      "flaw": 8,
+      "seam": "F",
+      "probe": "Session fixation via URL param carrier the app mirrors into cookie",
+      "confirmed_when": "param sets the session"
+    },
+    {
+      "flaw": 8,
+      "seam": "C",
+      "probe": "SameSite-vs-CORS verdict: raw Set-Cookie flags before rating reflected CORS",
+      "confirmed_when": "Lax+HttpOnly downgrades the class"
+    },
+    {
+      "flaw": 9,
+      "seam": "A",
+      "probe": "CL.TE differential at the edge: one timing-only probe, ambiguity = stop",
+      "confirmed_when": "behavior splits between layers"
+    },
+    {
+      "flaw": 9,
+      "seam": "I",
+      "probe": "Charset/content-type sniff on upload/parse endpoints",
+      "confirmed_when": "parser honors declared charset over validation"
+    },
+    {
+      "flaw": 9,
+      "seam": "F",
+      "probe": "Open-redirect + token delivery: returnTo/next on flows that carry secrets",
+      "confirmed_when": "Location leaves origin with secrets"
+    },
+    {
+      "flaw": 10,
+      "seam": "C",
+      "probe": "Bundle RNG entropy oracle: Math.random in the handoff/auth code path",
+      "confirmed_when": "code generator client-side, no CSPRNG"
+    },
+    {
+      "flaw": 10,
+      "seam": "C",
+      "probe": "JWT confusion battery: alg-none, anon-key-as-secret, header jwk injection",
+      "confirmed_when": "any variant verifies"
+    },
+    {
+      "flaw": 10,
+      "seam": "E",
+      "probe": "EIO sid reuse: engine.io sid across reconnects/users",
+      "confirmed_when": "sid accepted for another session"
+    },
+    {
+      "flaw": 11,
+      "seam": "H",
+      "probe": "Error-envelope diffing across sister brands",
+      "confirmed_when": "verbatim error from two hosts"
+    },
+    {
+      "flaw": 11,
+      "seam": "C",
+      "probe": "Forgot-password/resend mail-bomb: state-changers missing rate limits",
+      "confirmed_when": "36 rapid 200s, zero 429"
+    },
+    {
+      "flaw": 11,
+      "seam": "D",
+      "probe": "405/403/404 taxonomy route-map: status+content-type across all methods",
+      "confirmed_when": "route exists that the UI never names"
+    },
+    {
+      "flaw": 12,
+      "seam": "C",
+      "probe": "PTOK drift oracle: 3x identical 1-word requests, read usage.prompt_tokens",
+      "confirmed_when": "drifting/growing = shared server state"
+    },
+    {
+      "flaw": 12,
+      "seam": "C",
+      "probe": "Client system-role honored: send a system role the gateway adopts",
+      "confirmed_when": "system turns appear in the trace"
+    },
+    {
+      "flaw": 12,
+      "seam": "J",
+      "probe": "Model-substitution oracle: hidden-model-name variant, read served_by",
+      "confirmed_when": "substitute model serves the call"
+    },
+    {
+      "flaw": 12,
+      "seam": "E",
+      "probe": "Cross-user context poisoning write: plant directive via shared buffer",
+      "confirmed_when": "directive reappears in another caller's trace"
+    }
+  ],
+  "updated": "2026-11-03"
+}

@@ -167,7 +167,9 @@ templates/exploit-teardown.json  five-gene teardown template
 scripts/inject.py                stdlib-only mandate injector
 scripts/shinjitsu.py              authorization validation, plan/state/report helper
 scripts/arsenal.py               read-only battery runner (P0 gate in code, noise budgets)
-scripts/exploit-intel.py         exploit study/synthesis CLI (teardown, synthesize, derive, register)
+scripts/exploit-intel.py         exploit loop CLI (teardown, synthesize, derive, register,
+                                 converge, learn, drift, status, next, report, promote)
+scripts/matrix.json              runtime synthesis matrix (grows via promote)
 ```
 
 ## Relations

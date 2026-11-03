@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.4.0
+version: 1.5.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -270,7 +270,7 @@ coverage and authorization validation live in `references/universal-coverage.md`
 | 9 Breach/OSINT | arsenal-09-breach-osint.md | zero target traffic |
 | 10 LLM/AI | arsenal-10-llm-ai.md | manual, synthetic/approved data |
 | ALL | arsenal-index.md — first-60-minutes battery + noise budgets; universal-coverage.md — 16 domains | `scripts/shinjitsu.py` validates authorization, tracks coverage, renders reports |
-| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (36 flaw×seam pairs + §R rule) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn) |
+| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (36 flaw×seam pairs + §R rule) + scripts/matrix.json (runtime-grown) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn/drift/status/next/report/promote) |
 
 | Class | Kit (session-verified patterns inherit from holyshit-mode) |
 |---|---|
@@ -513,12 +513,23 @@ new probe classes from flaw-family × trust-seam combinations.
 - **Ledger integration:** teardowns land in `~/.redteam/campaigns/<target>/state.json`
   → `exploit_intel.teardowns[]`, synthesized probes → `synthesis_queue[]`. Session open
   reads it first — never re-teardown what state already holds (T2 canon).
+- **The closed loop (v1.5):** `drift` (re-verify baselines + wayback + optional PTOK before
+  any re-probe, rc 1 = drift) → `status` (coverage/teardowns/queue/findings dashboard) →
+  `next` (ranked actionable queue — TEST/PROBE/RE-VERIFY/COVER, negatives excluded) →
+  `converge` (N-model validation) → single decisive test → `register` (wire result) →
+  `learn` (growth row) → `promote --apply --verified` (row merges into `scripts/matrix.json`,
+  `.bak` backup taken) → `synthesize` emits it next run → `report` (P5 deliverable, ranked
+  confirmed > hypothesis > negatives). The loop has no iteration bound and no end state but
+  T1/T2 — it compounds per engagement.
 - **Convergence before spend:** `converge` runs a decisive-test candidate past N models
   (family canon: convergence is the reliability compound — it picks WHICH test to spend,
   it never replaces the single wire proof). CONFIRMED ≥ minproof → spend (rc 0); majority
   BLOCKED → ledger negative, do not spend (rc 1); budget exhausted → HYPOTHESIS with the
   named gaps, never a fabricated confirm (rc 3). Endpoint/models via `--endpoint/--models`
-  or `SHINJITSU_BASE`/`SHINJITSU_MODELS` (operator's own gateway only).
+  or `SHINJITSU_BASE`/`SHINJITSU_MODELS` (operator's own gateway only). Verify tool edits
+  offline against a stub `/chat/completions` server (canned VERDICT lines; round-aware
+  stubs for multi-round paths — holyshit-mode harness canon); never burn inference quota on
+  tool verification.
 - **Growth loop:** `learn` appends field-verified (flaw, seam, probe) rows to
   `~/.redteam/learned-vectors.jsonl`; promotion into the curated matrix happens consciously
   at P5 closeout after field verification — the arsenal compounds per engagement.
@@ -527,7 +538,8 @@ new probe classes from flaw-family × trust-seam combinations.
 
 Protocol: `references/exploit-intelligence-engine.md` (study/breakdown/adaptation) ·
 Battery: `references/vector-synthesis-matrix.md` (flaw × seam generator) ·
-Runner: `scripts/exploit-intel.py` (`teardown` / `synthesize` / `derive` / `register`).
+Runner: `scripts/exploit-intel.py` (teardown · synthesize · derive · register · converge ·
+learn · drift · status · next · report · promote). Matrix runtime file: `scripts/matrix.json`.
 Load the engine file BEFORE the first battery run of any engagement — it is the layer
 that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable step.
 
@@ -549,7 +561,8 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
 - `scripts/inject.py` — stdlib-only mandate injector for OpenAI-compatible endpoints.
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
-- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (curated flaw×seam matrix), `derive` (§R remainder rule), `register` (merge into campaign state `exploit_intel`), `converge` (N-model confirm/block vote on a candidate), `learn` (growth ledger at `~/.redteam/learned-vectors.jsonl`).
+- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue), `report` (P5 deliverable), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken).
+- `scripts/matrix.json` — the runtime synthesis matrix (grows via `promote`; regenerated from the curated markdown when needed).
 
 ## Relations
 
