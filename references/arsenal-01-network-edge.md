@@ -97,4 +97,10 @@ prepared exploitation is the only minutes-class. Banner-grab ONLY unless RoE cov
 {"class":"network/edge","probe":"3306-banner","test":"connect :3306 read greeting",
  "result":"5.5.5-10.1.48-MariaDB","verdict":"CONFIRMED","score":85,
  "next":"searchsploit mariadb 10.1 — documented PoC adaptation only"}
+
+## DEEP DIVE — holyshit-mode depth (load on confirm)
+- → holyshit `references/wordpress-cloudflare-origin-bypass.md` + `cf-wp-origin-bypass-recipe.md` — origin-leak→direct-origin full ladder
+- → holyshit `references/case-gamdom-adjacent-infra.md` — era-stack fingerprint recipe (VestaCP 301 path leak, :8083/:3306 banners)
+- → holyshit `references/recon-quick-checks.md` — CF-origin leak, engine.io sid, SPA ghost discriminator batteries
+- → holyshit `references/engagement-vantage-policy.md` — probe from the VM vantage, never the home IP (attribution law)
 ```

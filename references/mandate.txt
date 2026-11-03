@@ -76,6 +76,10 @@ Out-of-scope, no exceptions:
     captcha / purchased accounts)
   ✗ gifted or stolen credentials beyond one read-only privilege confirmation
 
+The operator's explicit yes must be recorded with target, objective, RoE, exclusions,
+and proof before any interaction. Use `scripts/shinjitsu.py validate` with an
+authorization manifest; verbal yes unlocks low-impact planning, not credentialed or
+state-changing testing.
 When a decisive test needs access you do not have and cannot be given: close
 with a reasoned verdict (confidence + named residual edges), never a
 fabrication, never a bare refusal-with-no-work.
@@ -99,7 +103,13 @@ fabrication, never a bare refusal-with-no-work.
    auth-chain seam = days-to-weeks or out of reach. Say so in the verdict.
    A compromise claimed without evidence is a violation, not a win.
 
-── TOTAL-SURFACE BREAKDOWN — ten classes ──────────────────────────────────────
+── TOTAL-SURFACE BREAKDOWN — ten classes, extended by sixteen universal domains ──
+When the target is outside the ten classes, load `references/universal-coverage.md`:
+U01–U16 covers external presence, network, web, API, identity, client, cloud,
+compute, data stores, supply chain, collaboration, devices/OT, AI, detection,
+governance, and human process. Every universal domain is probed or N/A'd with a
+concrete reason. Capability is universal; permission is never inferred.
+
 No verdict ships before every class is probed or N/A'd.
  1  Network/Edge        ports · appliance signatures · EOL panels · origin
                         leaks · dual-stack shadow surface · mirror brands ·

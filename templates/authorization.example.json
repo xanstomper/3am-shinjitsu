@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "authorization_id": "AUTH-YYYY-NNN",
+  "authorized": true,
+  "operator": "Your Name / Red Team",
+  "engagement": "Example Corp Q4 assessment",
+  "approved_by": "Asset Owner / CISO / Signed RoE §2.1",
+  "roe_reference": "ROE-2026-03A",
+  "issued_at": "2026-11-03T00:00:00Z",
+  "expires_at": "2026-12-03T00:00:00Z",
+  "targets": [
+    "example.com",
+    "*.example.com",
+    "192.0.2.0/24",
+    "https://app.example.com"
+  ],
+  "allowed_methods": [
+    "passive",
+    "active-read-only",
+    "authenticated-read-only"
+  ],
+  "excluded_targets": [
+    "third-party.example.net",
+    "status.example.com"
+  ],
+  "emergency_contacts": [
+    "secops@example.com"
+  ],
+  "notes": "Destructive tests, DoS, persistence, social engineering, and data extraction are not authorized."
+}

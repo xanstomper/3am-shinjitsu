@@ -91,3 +91,11 @@ return_to/ticket params, loginN series) first — see `edge-gate-recon.md`.
 ## 4.11 Dead-invite gates (score 60)
 - Invite-accept signatures: `?invite=<token>` acceptance is client- or server-checked?
   Expired-but-valid-shaped token behavior; enumeration oracle on 404-vs-410.
+
+## DEEP DIVE — holyshit-mode depth (load on confirm)
+- → holyshit `references/supabase-gotrue-playbook.md` — full GoTrue auth-chain recipe, verify-token 303 fragment, rate-sweep method
+- → holyshit `references/web-auth-chain-playbook.md` — RLS trust-flag escalation, web3-wallet challenge replay/binding ladder
+- → holyshit `references/oauth-redirect-uri-impact-gate.md` — redirect_uri override + live-listener interception (cloudflared + callback catcher)
+- → holyshit `references/case-gratisfy-xyz.md` — the GoTrue HOLY SHIT: redirect_uri forwarding, unauth handoff exchange, RNG entropy oracle
+- → holyshit `references/case-duelbits-com.md` — state-cookie carrier (signIn reads cookie named `state`), OAuth state-binding yardstick
+- → holyshit `references/case-logfare-ai-retest2.md` — cookie SameSite downgrade discipline, origin-lock matrix

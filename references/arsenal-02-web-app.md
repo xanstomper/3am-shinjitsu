@@ -79,3 +79,9 @@ map. Re-engagement = diff hashes before probing anything.
   re-fetch plain from another vantage within TTL.
 - CONFIRMED WHEN: poisoned content served to the plain fetch. Owned infra: revert = purge.
 - FP: CDN strips the header (common) — negative, ledger it.
+
+## DEEP DIVE — holyshit-mode depth (load on confirm)
+- → holyshit `references/full-teardown-playbook.md` — phase-ordered teardown + 10 highest-yield signatures
+- → holyshit `references/recon-quick-checks.md` — CF-origin leak, CORS, rate-limiter, ghost-route, chunk discovery batteries
+- → holyshit `references/client-bundle-source-study.md` — minified-identifier resolution, cookie-carrier traps
+- → holyshit `references/case-rainbet-com.md` — Next.js cookie-toss + CDX id-oracle + middleware-bypass first (CVE-2025-29927)

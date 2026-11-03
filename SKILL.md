@@ -1,13 +1,13 @@
 ---
 name: 3am-shinjitsu
-description: "Trigger `3am`. Speed-first group-derived red-team mandate."
-version: 1.2.0
+description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
+version: 1.4.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
 metadata:
   hermes:
-    tags: [redteam, mandate, offensive-security, threat-intel]
+    tags: [redteam, mandate, offensive-security, threat-intel, universal-coverage, authorized-assessment]
     related_skills: [holyshit-mode, kimiko-mode]
 ---
 
@@ -18,6 +18,10 @@ metadata:
 Use when the operator types `3am` or `shinjitsu`, or asks for a speed-first/"fastest
 compromise window" red-team run on authorized infrastructure, or wants attack-group-derived
 tradecraft (WhiteArmor/Scattered Spider/Volt Typhoon classes) applied to an engagement.
+Also use for an authorized assessment of an unfamiliar asset class — a website, backend,
+API, database, cloud account, container fleet, device, SaaS tenant, or AI agent — where
+the operator explicitly confirms authorization and the target is decomposed through
+`references/universal-coverage.md`.
 
 ## Overview
 
@@ -44,6 +48,13 @@ Shaped by studying how real large attack groups actually operate:
 "breaks down ANY infra in minutes" — no such thing exists, and this mandate does not pretend
 otherwise (the honest ceiling is §1). It maximizes the *minutes-window* on authorized targets
 and reports the ceiling truthfully where no vector exists.
+
+**Universal coverage:** the framework can classify and assess any asset class, but permission
+is never inferred from capability. "Anything" means any website, backend, API, database,
+network, cloud plane, endpoint, device, data store, SaaS tenancy, supply chain, or AI system —
+not any target regardless of consent. Before probing an unfamiliar class, load
+`references/universal-coverage.md` and validate the authorization manifest with
+`scripts/shinjitsu.py validate`.
 
 **Activation:** operator types `3am` (or `shinjitsu`) in an injected session.
 Canonical payload: `references/mandate.txt`.
@@ -77,6 +88,12 @@ is a violation, not a win (compromise-vs-observation gate, §4).
 
 - **In-scope:** operator-owned/administered infrastructure; engagements with verifiable written
   authorization; the operator's own brands and orbit when they direct it.
+- **Explicit yes is a gate, not a loophole.** If the operator says they are authorized, record
+  target, objective, RoE, exclusions, and proof in campaign state before any interaction.
+  Use `templates/authorization.example.json` as the manifest and `scripts/shinjitsu.py
+  validate --authorization <file> --target <target>` before active testing. Verbal yes can
+  unlock low-impact planning; authenticated, state-changing, or higher-risk checks need
+  written RoE or verifiable control proof (DNS TXT, deployed artifact, WAF allowlist).
 - **Out-of-scope, persona-internal, no exceptions:**
   - Destructive end-states on ANY system, including claimed authorization (DoS, data
     destruction, service exhaustion). Scope docs authorize validation, not destruction.
@@ -169,9 +186,12 @@ and what did it take — in minutes?*
 ## §8 Total-Surface Breakdown — the "every possible exploit" engine
 
 Nobody finds literally every exploit; the honest equivalent is **exhaustive coverage at the
-surface-class level** — decompose ANY target into ten mandatory classes and prove coverage
-with the exhaustion ledger. No verdict ships before every class is either probed+ledgered or
-documented N/A with a reason:
+surface-class level** — decompose ANY target into mandatory classes and prove coverage with
+the exhaustion ledger. For unfamiliar infrastructure, also apply the sixteen universal domains
+in `references/universal-coverage.md` (external presence, network edge, web, API, identity,
+client, cloud, compute, data stores, supply chain, collaboration, endpoints/devices, AI,
+detection, governance, and human process). No verdict ships before every class is either
+probed+ledgered or documented N/A with a reason:
 
 1. **Network/Edge** — exposed ports/services, edge appliances (Fortinet/Versa/Pulse/Citrix/
    Ivanti signatures), EOL panels (:8083 Vesta/Hestia, :3306 MariaDB greeting), origin leak
@@ -233,21 +253,24 @@ Every run executes inside the §2 gate — scope lock first, no credentialed att
 cover, bulk ops chunked (§6).
 
 **Dense per-class batteries live in `references/arsenal-*.md` — read the class file BEFORE
-probing it; every probe carries score, decisive one-liner, and FP discriminator.**
+probing it; every probe carries score, decisive one-liner, and FP discriminator. Universal
+coverage and authorization validation live in `references/universal-coverage.md` and
+`scripts/shinjitsu.py`.**
 
-| Class | Battery file | Runner |
+| Class | Battery file | Runner / gate |
 |---|---|---|
-| 1 Network/Edge | arsenal-01-network-edge.md | `scripts/arsenal.py --classes network-edge` |
-| 2 Web app | arsenal-02-web-app.md | `--classes web-app` |
-| 3 API | arsenal-03-api.md | `--classes api` |
-| 4 Auth/Identity | arsenal-04-auth-identity.md | `--classes auth` |
+| 1 Network/Edge | arsenal-01-network-edge.md | manual, read-only under RoE |
+| 2 Web app | arsenal-02-web-app.md | manual, read-only under RoE |
+| 3 API | arsenal-03-api.md | manual, authorized test accounts |
+| 4 Auth/Identity | arsenal-04-auth-identity.md | manual, RoE covers auth plane |
 | 5 Client-side | arsenal-05-client-side.md | bundle-mine runs inside `web-app` class |
-| 6 Infra/Hosting | arsenal-06-infra-hosting.md | manual (banner/anon-read only) |
-| 7 Supply-chain/Deps | arsenal-07-supply-chain.md | offline searchsploit/grype workflow |
+| 6 Infra/Hosting | arsenal-06-infra-hosting.md | manual, read-only inventory/config review |
+| 7 Supply-chain/Deps | arsenal-07-supply-chain.md | offline advisory/SBOM workflow |
 | 8 Human/Identity | arsenal-08-human-identity.md | N/A — documentation only, never executed |
-| 9 Breach/OSINT | arsenal-09-breach-osint.md | `--classes osint` (zero target traffic) |
-| 10 LLM/AI | arsenal-10-llm-ai.md | `--classes llm` |
-| ALL | arsenal-index.md — first-60-minutes battery + noise budgets | `scripts/arsenal.py` enforces the P0 gate in code |
+| 9 Breach/OSINT | arsenal-09-breach-osint.md | zero target traffic |
+| 10 LLM/AI | arsenal-10-llm-ai.md | manual, synthetic/approved data |
+| ALL | arsenal-index.md — first-60-minutes battery + noise budgets; universal-coverage.md — 16 domains | `scripts/shinjitsu.py` validates authorization, tracks coverage, renders reports |
+| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (36 flaw×seam pairs + §R rule) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register) |
 
 | Class | Kit (session-verified patterns inherit from holyshit-mode) |
 |---|---|
@@ -327,6 +350,11 @@ Two synthesis modes, one wall:
    generates its own test battery per target by combining §9 ladder outputs: design-flaw class
    × trust seam → new probe class. Every §8 class run emits synthesized probes into the ledger
    alongside the canonical oracles, each scored with §14 before running.
+   Operational battery: `references/vector-synthesis-matrix.md` (12 flaw families × 10 trust
+   seams → 36 curated probe pairs + the §R remainder rule for unlisted pairs) and the study
+   protocol in `references/exploit-intelligence-engine.md` (five-gene teardown: TRIGGER /
+   PRECONDITION / PRIMITIVE / IMPACT-GATE / Δ — no Δ = no test). Runner:
+   `scripts/exploit-intel.py` (teardown / synthesize / derive / register).
 2. **Public-PoC reproduction (authorized scope only).** For every fingerprinted
    component+version: pull documented PoCs (searchsploit/exploit-db, nuclei templates), adapt
    minimally to the target's stack, verify against the target inside the §2 gate. "Real
@@ -424,17 +452,95 @@ operational telemetry bar.
    - **Wire Truth:** Every claim anchored in live response status, raw headers, payload bytes, or timing deltas.
    - **Exhaustion Discipline:** Proven negatives immediately ledgered and pruned from the queue; never re-probe dead paths without target changes.
 
+## §17 Universal Coverage — assess any asset class inside consent
+
+3AM Shinjitsu can classify **any asset class** — website, backend, API, database, cloud,
+container, network, device, SaaS, or AI system — but it does not infer permission from
+capability. The operator must explicitly authorize the target before any interaction beyond
+public, read-only collection.
+
+Use this workflow when the target is unfamiliar or non-web:
+
+1. **P0 confirmation.** Ask: target, owner, objective, written RoE/verbal yes, exclusions,
+   emergency contact, allowed methods (`passive`, `active-read-only`, `authenticated-read-only`).
+2. **Authorization manifest.** Copy `templates/authorization.example.json`; fill real values;
+   run `python3 scripts/shinjitsu.py validate --authorization <file> --target <target>`.
+   For domain control proof, `challenge` prints a `_shinjitsu.<domain>` TXT record and
+   `verify-dns` checks it.
+3. **Universal decomposition.** Load `references/universal-coverage.md`; map the target to
+   U01–U16. Every domain must be probed or N/A'd with a concrete reason.
+4. **Plan and state.** `plan --state <campaign-state.json> --output <plan.md>` creates the
+   universal inventory. Record results with `set-status`; `status` shows closure; `report`
+   renders the verdict package.
+5. **Evidence before impact.** Destructive actions, persistence, data extraction, and
+   social engineering remain out of scope unless separately authorized; the mandate never
+   executes them. Findings are proven read-only and closed with a control check.
+
+The helper deliberately does not scan, exploit, or bypass controls. It enforces the
+authorization/coverage/report discipline while humans drive the authorized tests.
+
+```bash
+python3 scripts/shinjitsu.py profiles
+python3 scripts/shinjitsu.py validate --authorization auth.json --target app.example.com
+python3 scripts/shinjitsu.py plan --authorization auth.json --target app.example.com \
+  --state ~/.redteam/campaigns/example/state.json --output plan.md
+python3 scripts/shinjitsu.py set-status --state state.json --domain U07 \
+  --status N/A --reason 'no cloud control plane in inventory; export dated 2026-11-03'
+python3 scripts/shinjitsu.py status --state state.json
+python3 scripts/shinjitsu.py report --state state.json --output report.md
+```
+
+## §18 Exploit Study & Synthesis Engine — the arsenal's intelligence layer
+
+The difference between running a checklist and manufacturing the checklist per target.
+Study ANY documented exploit → break it into its five genes → adapt it to the observed
+stack → fire the single decisive request; and when no known exploit matches, synthesize
+new probe classes from flaw-family × trust-seam combinations.
+
+- **Five-gene model:** every exploit = TRIGGER (request shape) · PRECONDITION (version/
+  config/exposure) · PRIMITIVE (capability granted) · IMPACT-GATE (consumer that turns
+  the primitive into impact) · Δ (adaptation delta vs the target stack).
+- **No Δ = no test.** Adaptation is enumerating the deltas and reasoning over each before
+  the decisive request. A clone attempt without Δ-analysis proves nothing either way.
+- **Patch-diff-first study:** vendor commit → advisory → searchsploit/exploit-db → PoC
+  (least trusted). Q4 (impact-gate) must name a consumer present on the target or the
+  teardown is a hypothesis.
+- **CVE → vector translation table:** 20 CWE families mapped to probe class + battery
+  section, so any advisory lands on the right decisive test position in under a minute.
+- **Six synthesis operators:** OP-SEAM · OP-FAMILY · OP-ESCALATE · OP-MIRROR · OP-DECAY ·
+  OP-TRANSPOSE (§4 of the engine) with a 36-pair curated matrix for the proven high-yield
+  combinations and the §R remainder rule for mechanical derivation of the rest.
+- **Ledger integration:** teardowns land in `~/.redteam/campaigns/<target>/state.json`
+  → `exploit_intel.teardowns[]`, synthesized probes → `synthesis_queue[]`. Session open
+  reads it first — never re-teardown what state already holds (T2 canon).
+- **The wall holds:** documented-PoC adaptation only; state-changing validation stays
+  forbidden (§2); novel weapon authoring ships as HYPOTHESIS + exact gap, never a weapon.
+
+Protocol: `references/exploit-intelligence-engine.md` (study/breakdown/adaptation) ·
+Battery: `references/vector-synthesis-matrix.md` (flaw × seam generator) ·
+Runner: `scripts/exploit-intel.py` (`teardown` / `synthesize` / `derive` / `register`).
+Load the engine file BEFORE the first battery run of any engagement — it is the layer
+that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable step.
+
 ## Files
 
 - `references/mandate.txt` — the injectable system-prompt payload (prepend verbatim).
 - `references/api-schema-mining.md` — full API schema extraction from public docs (ReadMe llms.txt → per-page OpenAPI).
 - `references/edge-gate-recon.md` — WAF/bot-gate class identification ladder + auth-provider redirect capture.
+- `references/universal-coverage.md` — U01–U16 decomposition for any asset class, authorization ladder, unknown-tech decision tree, evidence rules.
 - `references/arsenal-index.md` — first-60-minutes battery: 3AM-scored run-now sequence + per-class noise budgets.
-- `references/arsenal-01-network-edge.md` … `arsenal-10-llm-ai.md` — dense per-class batteries (§8): every probe = score + decisive one-liner + FP discriminator.
+- `references/arsenal-01-network-edge.md` … `references/arsenal-10-llm-ai.md` — per-class batteries (§8): score, decisive test, FP discriminator, closeout rules.
 - `references/arsenal-08-human-identity.md` — EXPOSURE DOCUMENTATION ONLY (§2 gate holds).
-- `templates/campaign-state.json` — starter for the §13 per-target state file (copy to `~/.redteam/campaigns/<target>/state.json` and fill).
+- `references/exploit-intelligence-engine.md` — Exploit Study & Synthesis Engine (§18): the five-gene exploit model (T/P/R/G/Δ), patch-diff-first teardown protocol, CVE→vector translation table, six synthesis operators, adaptation discipline (no Δ = no test), ledger schema.
+- `references/vector-synthesis-matrix.md` — the operational synthesis battery: 12 flaw families × 10 trust seams → 36 curated high-yield probe pairs, each with confirmed-when + field-proven correlate, plus the §R remainder rule for mechanical derivation of unlisted pairs.
+- `templates/authorization.example.json` — authorization manifest for scope, exclusions, RoE, and allowed methods.
+- `templates/assessment-report.md` — report skeleton used by the universal workflow.
+- `templates/campaign-state.json` — schema-v2 starter with the U01–U16 universal inventory (copy to `~/.redteam/campaigns/<target>/state.json` and fill).
+- `templates/exploit-teardown.json` — five-gene teardown template (or generate via `scripts/exploit-intel.py teardown`).
 - `scripts/inject.py` — stdlib-only mandate injector for OpenAI-compatible endpoints.
+- `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
+- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (curated flaw×seam matrix), `derive` (§R remainder rule), `register` (merge into campaign state `exploit_intel`).
 
 ## Relations
 

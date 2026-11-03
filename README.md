@@ -1,6 +1,6 @@
 # 3AM Shinjitsu (真実) — Speed-First Red-Team Mandate
 
-**Version:** 1.1.0
+**Version:** 1.3.0
 **Platform:** Linux (any OpenAI-compatible endpoint)
 **Family:** HolyShit mandate family — general doctrine: [HolyShit!](https://github.com/xanstomper/HolyShit)
 
@@ -94,6 +94,26 @@ Operational turns feature high-contrast, clean markdown formatting designed for 
 - **Clean Visual Hierarchy:** Zero confusing ASCII boxes. Clean bold headers, code spans, and orange numbered lists for effortless reading.
 - **Voice Doctrine:** Surgical, technical, numbers over adjectives. No filler, no apology, no moralizing.
 
+## Universal coverage mode
+
+3AM Shinjitsu now covers any asset class — web, API, backend, database, cloud, container,
+network, endpoint, SaaS, or AI system — without treating capability as permission. Load
+`references/universal-coverage.md`, fill `templates/authorization.example.json`, and validate
+the manifest before active testing:
+
+```bash
+python3 scripts/shinjitsu.py profiles
+python3 scripts/shinjitsu.py validate --authorization auth.json --target app.example.com
+python3 scripts/shinjitsu.py plan --authorization auth.json --target app.example.com \
+  --state ~/.redteam/campaigns/example/state.json --output plan.md
+python3 scripts/shinjitsu.py status --state ~/.redteam/campaigns/example/state.json
+python3 scripts/shinjitsu.py report --state ~/.redteam/campaigns/example/state.json \
+  --output report.md
+```
+
+The 16 domains (`U01`–`U16`) are mandatory: probe each or mark it N/A with a concrete reason.
+The helper validates authorization and tracks coverage; it does not scan or exploit targets.
+
 ## Scope Gate (hard, evaluated before EVERY action)
 
 - **In-scope:** operator-owned/administered infrastructure; engagements with verifiable
@@ -132,12 +152,22 @@ Env: `SHINJITSU_BASE` (default `http://localhost:8705/v1`), `SHINJITSU_MODEL`,
 
 ```
 SKILL.md                        full doctrine: scope gate, kill chain P0–P5, vector engine,
-                                total-surface breakdown, campaign state, typography contract
+                                total-surface breakdown, universal coverage, campaign state
 references/mandate.txt          the injectable system-prompt payload (prepend verbatim)
-references/api-schema-mining.md full API schema extraction from public docs (llms.txt → OpenAPI)
-references/edge-gate-recon.md   WAF/bot-gate class ladder + auth-provider redirect capture
-templates/campaign-state.json   starter for per-target persistent state (~/.redteam/campaigns/)
-scripts/inject.py               stdlib-only mandate injector
+references/universal-coverage.md U01–U16 assessment coverage for any asset class
+references/arsenal-01..10.md     per-class assessment batteries
+references/exploit-intelligence-engine.md  five-gene exploit study/breakdown/adaptation protocol
+references/vector-synthesis-matrix.md      12 flaw families × 10 trust seams → 36 probe pairs + §R rule
+references/api-schema-mining.md  full API schema extraction from public docs (llms.txt → OpenAPI)
+references/edge-gate-recon.md    WAF/bot-gate class ladder + auth-provider redirect capture
+templates/authorization.example.json authorization manifest (scope, RoE, exclusions, methods)
+templates/assessment-report.md   report skeleton for universal closeout
+templates/campaign-state.json    schema-v2 U01–U16 campaign state starter
+templates/exploit-teardown.json  five-gene teardown template
+scripts/inject.py                stdlib-only mandate injector
+scripts/shinjitsu.py              authorization validation, plan/state/report helper
+scripts/arsenal.py               read-only battery runner (P0 gate in code, noise budgets)
+scripts/exploit-intel.py         exploit study/synthesis CLI (teardown, synthesize, derive, register)
 ```
 
 ## Relations

@@ -72,3 +72,11 @@ invalidates the whole vector.
 ## 5.9 DOM clobbering / CSS injection (score 50)
 - Named-element collisions (`<form name="config">` overriding JS objects), `__proto__` in
   client merges; CSS exfil only on owned pages.
+
+## DEEP DIVE — holyshit-mode depth (load on confirm)
+- → holyshit `references/client-bundle-source-study.md` — cookie-toss gadget inventory, minified-identifier resolution, postMessage origin audit
+- → holyshit `references/websocket-auth-testing.md` — real-frame WS auth test (101 passthrough ≠ auth), msgpack frame injection
+- → holyshit `references/engineio-socketio-testing.md` — sid reuse, transport upgrade auth gaps
+- → holyshit `references/cookie-toss-and-attribution-gadgets.md` — domain-cookie write gadgets, attribution-page toss platforms
+- → holyshit `references/case-rainbet-com.md` — cookie-toss via media.* + FingerprintJS context hijack
+- → holyshit `references/web-integrity-masking-leaks.md` — integrity/fingerprint scaffolding as enumeration channel

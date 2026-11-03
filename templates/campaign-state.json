@@ -1,33 +1,150 @@
 {
-  "target": "",
-  "scope_note": {
-    "objective": "",
-    "authorization": "",
-    "boundary": "",
-    "roe": ""
-  },
+  "schema_version": 2,
+  "target": "<target exactly as authorized>",
   "locked": "<ISO-8601 timestamp with timezone>",
-  "edge_gate": {
-    "classification": "",
-    "root_cause": "",
-    "probes": [],
-    "verdict": ""
+  "authorization": {
+    "id": "AUTH-YYYY-NNN",
+    "roe_reference": "ROE ref / signed approval",
+    "operator": "<assessor>",
+    "engagement": "<engagement name>",
+    "expires_at": "<ISO-8601>",
+    "allowed_methods": [
+      "passive"
+    ],
+    "approved_by": "<asset owner / CISO / signed RoE>"
+  },
+  "scope": {
+    "host": "<host>",
+    "port": null,
+    "excluded_targets": []
+  },
+  "universal_inventory": {
+    "U01": {
+      "name": "External presence & DNS",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U02": {
+      "name": "Network edge & services",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U03": {
+      "name": "Web application",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U04": {
+      "name": "API & microservices",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U05": {
+      "name": "Identity & access",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U06": {
+      "name": "Client & end user",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U07": {
+      "name": "Cloud control plane",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U08": {
+      "name": "Compute & containers",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U09": {
+      "name": "Data stores & backups",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U10": {
+      "name": "Supply chain & dependencies",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U11": {
+      "name": "Email & collaboration",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U12": {
+      "name": "Endpoint & devices",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U13": {
+      "name": "AI & LLM systems",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U14": {
+      "name": "Detection & response",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U15": {
+      "name": "Governance & data",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    },
+    "U16": {
+      "name": "Human & process",
+      "status": "PENDING",
+      "reason": "",
+      "evidence": "",
+      "updated_at": null
+    }
   },
   "surface_inventory": {
-    "1_network_edge": "PROBED - findings | N/A - reason",
-    "2_web_app": "",
-    "3_api": "",
-    "4_auth_identity": "",
-    "5_client_side": "",
-    "6_infra_hosting": "",
-    "7_supply_chain": "",
+    "1_network_edge": "PENDING",
+    "2_web_app": "PENDING",
+    "3_api": "PENDING",
+    "4_auth_identity": "PENDING",
+    "5_client_side": "PENDING",
+    "6_infra_hosting": "PENDING",
+    "7_supply_chain": "PENDING",
     "8_human_identity": "EXPOSURE DOCUMENTATION ONLY - never executed",
-    "9_breach_osint": [],
-    "10_llm_ai": "N/A when target has no AI layer"
+    "9_breach_osint": "PENDING",
+    "10_llm_ai": "N/A - no AI layer, or PENDING"
   },
-  "exhaustion_ledger": {
-    "<class>": "definite negative recorded WITH the exact test"
-  },
+  "exhaustion_ledger": {},
   "findings_ledger": [
     {
       "id": "F1",
@@ -38,10 +155,35 @@
       "decay": "re-verify on re-entry; hot-deploy targets decay in hours"
     }
   ],
+  "exploit_intel": {
+    "teardowns": [
+      {
+        "id": "CVE-YYYY-NNNNN | keyword",
+        "genes": {
+          "trigger": "",
+          "precondition": "",
+          "primitive": "",
+          "impact_gate": "",
+          "delta": []
+        },
+        "adaptation": "PENDING | READY | TESTED",
+        "ledgered": false,
+        "verdict": "CONFIRMED|NEGATIVE|HYPOTHESIS|INCONCLUSIVE",
+        "score": 0
+      }
+    ],
+    "synthesis_queue": [
+      {
+        "flaw": "",
+        "seam": "",
+        "probe": "",
+        "score": 0,
+        "status": "QUEUED|RUN|EXHAUSTED"
+      }
+    ]
+  },
   "asset_baselines": {},
   "revert_map": "no state changes made on target - read-only session",
-  "noise_budget": "~N requests total, ~N% of class budget; zero origin touches",
-  "residual_edges": [
-    "named gap + what would unlock it (RoE, vantage, credentials)"
-  ]
+  "noise_budget": "not started",
+  "residual_edges": []
 }
