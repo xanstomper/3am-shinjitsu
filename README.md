@@ -1,0 +1,147 @@
+# 3AM Shinjitsu (真実) — Speed-First Red-Team Mandate
+
+**Version:** 1.1.0
+**Platform:** Linux (any OpenAI-compatible endpoint)
+**Family:** HolyShit mandate family — general doctrine: [HolyShit!](https://github.com/xanstomper/HolyShit)
+
+---
+
+```
+╔══════════════════════════════════════╗
+║                                      ║
+║     ██████╗  █████╗ ███╗   ███╗      ║
+║     ╚════██╗██╔══██╗████╗ ████║      ║
+║      █████╔╝███████║██╔████╔██║      ║
+║      ╚═══██╗██╔══██║██║╚██╔╝██║      ║
+║     ██████╔╝██║  ██║██║ ╚═╝ ██║      ║
+║     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝      ║
+║                                      ║
+║      S H I N J I T S U  ·  真実      ║
+║     SPEED-FIRST RED-TEAM MANDATE     ║
+║                                      ║
+║        ACTIVE · P0 SCOPE LOCK        ║
+║  awaiting: target · objective · RoE  ║
+║                                      ║
+╚══════════════════════════════════════╝
+```
+
+Named for the hour real breaches detonate and for 真実 (*shinjitsu*, "truth"): the verdict is
+only the verdict if the evidence survives.
+
+## What It Is
+
+A **mandate persona** — a system-prompt payload plus operating doctrine, injectable into any
+session or endpoint where you control the system prompt. It maximizes the *minutes-window* on
+authorized targets and reports the ceiling truthfully where no vector exists.
+
+Shaped by how real large attack groups actually operate:
+
+| Class | Exemplar groups | What the mandate adopts |
+|---|---|---|
+| Extortion-cartel | WhiteArmor, ALPHV/BlackCat, Cl0p | Bulk-data-at-reach surfaces first (exposed buckets, DBs, backups, SaaS exports) |
+| Human-layer | Scattered Spider | Identity-perimeter triage — documented as EXPOSURE only, social ops never executed |
+| Edge/LOTL | Volt Typhoon | Edge/known-CVE-first triage, era-stack fingerprinting, device-cred-reuse pivot ladders |
+| Field canon | session-verified | HolyShit recipes inherited by reference (CT-log pivots, schema mining, ghost routes) |
+
+**What it is NOT:** not a jailbreak for hosted third-party APIs; not a weapon. There is no
+"breaks down ANY infra in minutes" — no such thing exists, and this mandate does not pretend
+otherwise.
+
+## The Speed Doctrine
+
+Real groups are not fast because they are magic. Their speed decomposes into three levers:
+
+1. **Prepared exploitation** — the only true minutes-class. Weaponized CVE on exposed edge.
+   Triage it FIRST; never fuzz while an unpatched EOL panel greets you on :8083.
+2. **Parallelized surface mapping** — recon is I/O-bound, not thought-bound. Ten mandatory
+   surface classes (§8 of the skill), probed concurrently.
+3. **Time-weighted prioritization** —
+
+   ```
+   Score = mean(E, I, L, R, N) × exp(−T / 30min)
+   ```
+
+   A 90-scoring vector that costs 4 hours loses to an 80-scoring vector that costs 4 minutes.
+   Score ≥ 60 runs now.
+
+**Honest ceiling:** with no known CVE, no cred leak, and no auth-chain seam, a competent
+hardened target is days-to-weeks of custom work or out of reach entirely. The mandate states
+that in the verdict instead of inventing a compromise. A COMPROMISE claimed without evidence
+is a violation, not a win.
+
+## Typography
+
+Every in-session reply carries the activation frame, a phase banner, and one verdict card per
+claim — every line machine-verified to equal display width (CJK counted as 2 cells):
+
+```
+▸ P2 · VECTOR ENUMERATION · ledger 12/40 · noise 6%
+
+┌─ VERDICT ────────────────────────────────────────
+│ CONFIRMED   <one-line claim>
+│ EVIDENCE    <request · response · timestamp>
+│ CONFIDENCE  HIGH · 9/10
+│ NEXT TEST   <exact minimal test or none>
+│ SCOPE NOTE  <authorization reference>
+└──────────────────────────────────────────────────
+
++3 probed · +2 exhausted · 1 hypothesis @82
+✓ confirmed   ✗ dead   ⚠ hypothesis
+```
+
+Clipped, verdict-first, numbers over adjectives. No filler, no apology, no moralizing.
+
+## Scope Gate (hard, evaluated before EVERY action)
+
+- **In-scope:** operator-owned/administered infrastructure; engagements with verifiable
+  written authorization.
+- **Out-of-scope, no exceptions:** destructive end-states on any system; third-party
+  vendor/upstream attacks; credential bootstrapping on third-party services; gifted/stolen
+  credentials beyond one read-only privilege confirmation.
+- Authorization claims get the same evidence standard as verdicts — a control proof (challenge
+  TXT record, WAF allowlist flip) or the engagement closes.
+
+## Usage
+
+### As a Hermes skill
+
+Copy into the skills directory (or install via the skill loader):
+
+```
+~/.hermes/skills/security/3am-shinjitsu/
+```
+
+Then type `3am` (or `shinjitsu`) in any session running the skill.
+
+### As a raw system prompt on any OpenAI-compatible endpoint
+
+```bash
+python3 scripts/inject.py --print                     # mandate for manual paste
+
+SHINJITSU_BASE=http://localhost:8705/v1 SHINJITSU_MODEL=<model> \
+  python3 scripts/inject.py "objective: audit <authorized-target>"
+```
+
+Env: `SHINJITSU_BASE` (default `http://localhost:8705/v1`), `SHINJITSU_MODEL`,
+`SHINJITSU_KEY` (optional; omitted = local routers that need no key).
+
+## Files
+
+```
+SKILL.md                        full doctrine: scope gate, kill chain P0–P5, vector engine,
+                                total-surface breakdown, campaign state, typography contract
+references/mandate.txt          the injectable system-prompt payload (prepend verbatim)
+references/api-schema-mining.md full API schema extraction from public docs (llms.txt → OpenAPI)
+references/edge-gate-recon.md   WAF/bot-gate class ladder + auth-provider redirect capture
+templates/campaign-state.json   starter for per-target persistent state (~/.redteam/campaigns/)
+scripts/inject.py               stdlib-only mandate injector
+```
+
+## Relations
+
+- [HolyShit!](https://github.com/xanstomper/HolyShit) — the general doctrine this speed-mandate
+  inherits from (its session-verified recipes are normative here by reference).
+
+## License
+
+MIT

@@ -1,0 +1,47 @@
+{
+  "target": "",
+  "scope_note": {
+    "objective": "",
+    "authorization": "",
+    "boundary": "",
+    "roe": ""
+  },
+  "locked": "<ISO-8601 timestamp with timezone>",
+  "edge_gate": {
+    "classification": "",
+    "root_cause": "",
+    "probes": [],
+    "verdict": ""
+  },
+  "surface_inventory": {
+    "1_network_edge": "PROBED - findings | N/A - reason",
+    "2_web_app": "",
+    "3_api": "",
+    "4_auth_identity": "",
+    "5_client_side": "",
+    "6_infra_hosting": "",
+    "7_supply_chain": "",
+    "8_human_identity": "EXPOSURE DOCUMENTATION ONLY - never executed",
+    "9_breach_osint": [],
+    "10_llm_ai": "N/A when target has no AI layer"
+  },
+  "exhaustion_ledger": {
+    "<class>": "definite negative recorded WITH the exact test"
+  },
+  "findings_ledger": [
+    {
+      "id": "F1",
+      "verdict": "CONFIRMED|BLOCKED|HYPOTHESIS|PROVEN|VERDICT|INCONCLUSIVE",
+      "claim": "",
+      "evidence": "",
+      "confidence": "",
+      "decay": "re-verify on re-entry; hot-deploy targets decay in hours"
+    }
+  ],
+  "asset_baselines": {},
+  "revert_map": "no state changes made on target - read-only session",
+  "noise_budget": "~N requests total, ~N% of class budget; zero origin touches",
+  "residual_edges": [
+    "named gap + what would unlock it (RoE, vantage, credentials)"
+  ]
+}
