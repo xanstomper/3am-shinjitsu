@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.9.0
+version: 1.10.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -596,7 +596,8 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 - `scripts/trigger-anim.py` — the REAL activation animation (Terminal tool on Turn 1): typewriter header, boot spinners, loading bar, ARMED flash, pulse. Non-TTY → prints the static sequence. `NO_COLOR=1` / `3AM_FAST=1` env knobs.
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
-- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue), `report` (P5 deliverable incl. takeover chains), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken), `chain` (certify A→B→C:TAKEOVER|PARTIAL|BLOCKED).
+- `scripts/verify_3am.py` — offline verification suite: compile, JSON, matrix sync (≥59 module==json), CLI subcommand set, art-clean (zero old block art), gate language, SKILL sections/version, skill-dir↔repo sync. Run after ANY edit: `python3 scripts/verify_3am.py` (rc 0 = all pass).
+- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue incl. EXPAND/UNBLOCK for chains), `report` (P5 deliverable incl. takeover chains), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken), `chain` (certify A→B→C:TAKEOVER|PARTIAL|BLOCKED).
 - `scripts/matrix.json` — the runtime synthesis matrix (grows via `promote`; regenerated from the curated markdown when needed).
 
 ## Relations
