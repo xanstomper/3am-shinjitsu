@@ -1,6 +1,6 @@
 # 3AM Shinjitsu (真実) — Speed-First Red-Team Mandate
 
-**Version:** 1.10.0
+**Version:** 1.11.0
 **Platform:** Linux (any OpenAI-compatible endpoint)
 **Family:** HolyShit mandate family — general doctrine: [HolyShit!](https://github.com/xanstomper/HolyShit)
 

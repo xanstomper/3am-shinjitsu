@@ -91,7 +91,7 @@ def c_matrix():
 # ── 4. every subcommand present ───────────────────────────────────────
 def c_cli():
     want = {"teardown", "synthesize", "derive", "register", "converge", "learn",
-            "drift", "status", "next", "report", "promote", "chain"}
+            "drift", "status", "next", "report", "promote", "chain", "sweep"}
     r = subprocess.run([sys.executable, str(HERE / "exploit-intel.py"), "--help"],
                        capture_output=True, text=True)
     have = set(re.findall(r"^\s*\{?(\w+),?", r.stdout, re.M)) & want

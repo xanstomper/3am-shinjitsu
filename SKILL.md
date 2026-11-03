@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.10.0
+version: 1.11.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -279,7 +279,7 @@ coverage and authorization validation live in `references/universal-coverage.md`
 | 9 Breach/OSINT | arsenal-09-breach-osint.md | zero target traffic |
 | 10 LLM/AI | arsenal-10-llm-ai.md | manual, synthetic/approved data |
 | ALL | arsenal-index.md — first-60-minutes battery + noise budgets; universal-coverage.md — 16 domains | `scripts/shinjitsu.py` validates authorization, tracks coverage, renders reports |
-| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (59 flaw×seam pairs incl. universal classes + §R rule) + scripts/matrix.json (runtime-grown) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn/drift/status/next/report/promote/chain) |
+| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (59 flaw×seam pairs incl. universal classes + §R rule) + scripts/matrix.json (runtime-grown) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn/drift/status/next/report/promote/chain/sweep) |
 | T Takeover/Expansion | takeover-batteries.md — T1..T7 takeover classes, validation-only decisive proofs, pivot inputs, chain certification | `scripts/exploit-intel.py chain` (record A→B→C:TAKEOVER) |
 
 | Class | Kit (session-verified patterns inherit from holyshit-mode) |
@@ -519,9 +519,11 @@ new probe classes from flaw-family × trust-seam combinations.
 - **Ledger integration:** teardowns land in `~/.redteam/campaigns/<target>/state.json`
   → `exploit_intel.teardowns[]`, synthesized probes → `synthesis_queue[]`. Session open
   reads it first — never re-teardown what state already holds (T2 canon).
-- **The closed loop (v1.5):** `drift` (re-verify baselines + wayback + optional PTOK before
-  any re-probe, rc 1 = drift) → `status` (coverage/teardowns/queue/findings dashboard) →
-  `next` (ranked actionable queue — TEST/PROBE/RE-VERIFY/COVER, negatives excluded) →
+- **The closed loop (v1.5+):** `sweep --stack <fingerprints>` is the press-button entry:
+  drift → auto-queue (fingerprint→flaw-family map fills the queue from one stack hint) →
+  converge top N (N-model validation) → ranked fire-list with confirmed-when conditions.
+  Then `status` (dashboard) → `next` (ranked actionable queue — TEST/PROBE/RE-VERIFY/
+  EXPAND/UNBLOCK/COVER, negatives excluded) →
   `converge` (N-model validation) → single decisive test → `register` (wire result) →
   `learn` (growth row) → `promote --apply --verified` (row merges into `scripts/matrix.json`,
   `.bak` backup taken) → `synthesize` emits it next run → `chain` (certify the expansion
@@ -597,7 +599,7 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
 - `scripts/verify_3am.py` — offline verification suite: compile, JSON, matrix sync (≥59 module==json), CLI subcommand set, art-clean (zero old block art), gate language, SKILL sections/version, skill-dir↔repo sync. Run after ANY edit: `python3 scripts/verify_3am.py` (rc 0 = all pass).
-- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue incl. EXPAND/UNBLOCK for chains), `report` (P5 deliverable incl. takeover chains), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken), `chain` (certify A→B→C:TAKEOVER|PARTIAL|BLOCKED).
+- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue incl. EXPAND/UNBLOCK for chains), `report` (P5 deliverable incl. takeover chains), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken), `chain` (certify A→B→C:TAKEOVER|PARTIAL|BLOCKED), `sweep --stack <fps>` (press-button: drift → auto-queue → converge → fire-list).
 - `scripts/matrix.json` — the runtime synthesis matrix (grows via `promote`; regenerated from the curated markdown when needed).
 
 ## Relations
