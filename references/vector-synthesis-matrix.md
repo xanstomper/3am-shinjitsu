@@ -27,6 +27,11 @@ with a confirmed-when condition and a case correlate that proved the class in th
 | H | Multi-host family | sister brands, staging, dead-DNS-live-cert |
 | I | i18n/asset plane | chunk subset, env-object, template-literal paths |
 | J | LLM layer | shared buffers vs per-request state |
+| K | Cloud-policy | object-store / IAM policy vs enforcement gap |
+| L | Device-firmware | console/OTA/update path vs signed trust |
+| M | Protocol-handshake | network services' pre-auth handshake |
+| N | Collab-app | webhook/grant registration trust |
+| O | Monitoring-plane | orchestration/monitoring reachable anonymously |
 
 ## Flaw-family key
 
@@ -44,6 +49,14 @@ with a confirmed-when condition and a case correlate that proved the class in th
 | 10 | Entropy/forge | tokens/keys weaker than claimed |
 | 11 | Observable-oracle | errors/timing leak what should stay hidden |
 | 12 | LLM data-plane | model state leaks or mutates across callers |
+| 13 | **Cloud-misconfig** | identity/policy/object-store misconfiguration grants access |
+| 14 | **Network-protocol** | the service protocol trusts the anonymous client |
+| 15 | **Database-exposure** | a data engine is reachable without a valid identity |
+| 16 | **Mobile-device** | package/deep-link/update-path trust abuse |
+| 17 | **Firmware-hardware** | device trust-chain gaps (console, OTA, vendor defaults) |
+| 18 | **Wireless-RF** | the medium's trust assumptions (WPS, pairing, broadcast) |
+| 19 | **Collab-webhook** | app-to-app trust (webhooks, grants, bots) abused |
+| 20 | **Operational-planes** | monitoring/orchestration plane reachable unauthenticated |
 
 ## The matrix — 36 curated high-yield pairs
 
@@ -85,6 +98,43 @@ with a confirmed-when condition and a case correlate that proved the class in th
 | 12 | C | Client system-role honored: send a system role the gateway adopts | system turns appear in the trace | obsidian-y data plane |
 | 12 | J | Model-substitution oracle: request a hidden model-name variant, read `served_by` | substitute model serves the call | obsidian-y served_by |
 | 12 | E | Cross-user context poisoning write: plant directive via shared buffer | directive reappears in another caller's trace | obsidian-y (score 95) |
+
+## Universal-class pairs — families 13–20 (non-web compromise battery)
+
+Every row: decisive test · confirmed-when · field canon. All read-only or
+minimal-proof; documented-PoC adaptation only (§15 wall). Load
+`universal-coverage.md` §Per-domain decisive tests for the full battery per U-domain.
+
+| Flaw | Seam | Synthesized probe (decisive one-liner) | Confirmed-when | ★ Correlate |
+|---|---|---|---|---|
+| 13 | K | Public bucket listing: `GET <bucket>?list-type=2` without creds | 200 + object keys with no identity | public-bucket canon (S3/Azure/GCS) |
+| 13 | K | IAM privesc path: policy diff for AssumeRole/PassRole abuse | owned identity can escalate | IAM privesc canon (Rhino) |
+| 13 | H | Cross-account role assumption: staging identity → prod role | prod reachable from staging | multi-account canon |
+| 14 | M | SNMP public walk: `snmpget -v2c -c public` sysDescr | OID values without auth | SNMP canon |
+| 14 | M | NFS: `showmount -e` + root-squash state | world-readable export | NFS canon |
+| 14 | M | SMB anonymous: `smbclient -N -L //host` | share listing without creds | SMB NULL-session canon |
+| 14 | M | VNC/RDP pre-auth handshake auth-type negotiation | None/Plain accepted | RDP/VNC canon |
+| 15 | M | Redis anon: connect :6379 → `INFO` | server info without auth | Redis unauth canon |
+| 15 | M | Elasticsearch anon: `GET :9200/_cluster/health` + `_cat/indices` | 200 + indices without creds | ES canon |
+| 15 | M | Mongo anon (operator-owned only): no-auth connect, list dbs | db list without creds | Mongo canon |
+| 15 | L | Backup exposure: web-adjacent `.bak/.sql/.gz/dump` paths | dump readable unauth | backup-leak canon |
+| 16 | L | Deep-link tampering: exported activity launch, no permission (owned devices) | activity starts w/o permission | Android exported-activity canon |
+| 16 | L | Update-path trust: unsigned/plaintext update package | tamperable artifact | mobile update canon |
+| 17 | L | Firmware extraction: update pkg → strings/secrets (operator-provided) | creds/keys in image | firmware autopsy canon |
+| 17 | L | Default creds on network gear (vendor lists) | admin login on default | default-creds canon (routerpwn class) |
+| 18 | N | WPS PIN brute feasibility: enabled + no lockout (hardware access) | WPS active, no rate-limit | WPS canon |
+| 18 | N | Open pairing/broadcast: inquiry without auth | discoverable + auth-free | BT/BLE canon |
+| 19 | N | Unauth webhook registration/fetch: URL as SSRF | registration accepts internal URL | webhook-SSRF canon |
+| 19 | N | OAuth app over-grant: full-tenant scopes on install | grant > app need | OAuth app-grant canon |
+| 20 | O | kubelet unauth: `GET :10250/pods` | pod list without creds | kubelet canon (CVE-2020-8554 class) |
+| 20 | O | etcd unauth (operator-owned): `GET :2379/version` + keys | keys readable | etcd canon |
+| 20 | O | Docker socket: `GET :2375/containers/json` | container list unauth | Docker API canon |
+| 20 | O | Grafana/Prometheus anon: `/api/status`, `/metrics` | dashboards/metrics unauth | observability canon |
+
+Rule: a positive on ANY of these = OP-ESCALATE immediately (the consumer hunt:
+bucket keys → credentials; kubelet pods → service tokens; firmware creds →
+device pivot; webhook SSRF → internal plane). A compromise without the
+consumer hunt is a half-finished chain.
 
 ## §R — the remainder rule (derive any unlisted pair)
 

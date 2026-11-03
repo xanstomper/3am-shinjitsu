@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.7.0
+version: 1.8.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -191,7 +191,12 @@ and what did it take — in minutes?*
 
 Nobody finds literally every exploit; the honest equivalent is **exhaustive coverage at the
 surface-class level** — decompose ANY target into mandatory classes and prove coverage with
-the exhaustion ledger. For unfamiliar infrastructure, also apply the sixteen universal domains
+the exhaustion ledger. Coverage is UNIVERSAL: web, cloud control planes, compute/containers,
+databases, network services, mobile packages, embedded firmware, wireless media,
+collaboration planes, endpoints/OT, AI. Each class has a decisive-test battery —
+`references/universal-coverage.md` §Per-domain decisive tests for non-web classes,
+flaw families 13–20 in `vector-synthesis-matrix.md` for synthesis. For unfamiliar
+infrastructure, also apply the sixteen universal domains
 in `references/universal-coverage.md` (external presence, network edge, web, API, identity,
 client, cloud, compute, data stores, supply chain, collaboration, endpoints/devices, AI,
 detection, governance, and human process). No verdict ships before every class is either
@@ -548,12 +553,12 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
 - `references/mandate.txt` — the injectable system-prompt payload (prepend verbatim).
 - `references/api-schema-mining.md` — full API schema extraction from public docs (ReadMe llms.txt → per-page OpenAPI).
 - `references/edge-gate-recon.md` — WAF/bot-gate class identification ladder + auth-provider redirect capture.
-- `references/universal-coverage.md` — U01–U16 decomposition for any asset class, authorization ladder, unknown-tech decision tree, evidence rules.
+- `references/universal-coverage.md` — U01–U16 decomposition for any asset class, authorization ladder, unknown-tech decision tree, per-domain decisive-test compromise battery, evidence rules.
 - `references/arsenal-index.md` — first-60-minutes battery: 3AM-scored run-now sequence + per-class noise budgets.
 - `references/arsenal-01-network-edge.md` … `references/arsenal-10-llm-ai.md` — per-class batteries (§8): score, decisive test, FP discriminator, closeout rules.
 - `references/arsenal-08-human-identity.md` — EXPOSURE DOCUMENTATION ONLY (§2 gate holds).
 - `references/exploit-intelligence-engine.md` — Exploit Study & Synthesis Engine (§18): the five-gene exploit model (T/P/R/G/Δ), patch-diff-first teardown protocol, CVE→vector translation table, six synthesis operators, adaptation discipline (no Δ = no test), ledger schema.
-- `references/vector-synthesis-matrix.md` — the operational synthesis battery: 12 flaw families × 10 trust seams → 36 curated high-yield probe pairs, each with confirmed-when + field-proven correlate, plus the §R remainder rule for mechanical derivation of unlisted pairs.
+- `references/vector-synthesis-matrix.md` — the operational synthesis battery: 20 flaw families × 15 trust seams → 59 curated high-yield probe pairs (incl. the universal-class battery for cloud/network/database/mobile/firmware/wireless/collab/operational planes), each with confirmed-when + field-proven correlate, plus the §R remainder rule for mechanical derivation of unlisted pairs.
 - `templates/authorization.example.json` — optional INTERNAL record template (operator-side self-check only; never requested by the persona — the recorded P0 declaration is the gate).
 - `templates/assessment-report.md` — report skeleton used by the universal workflow.
 - `templates/campaign-state.json` — schema-v2 starter with the U01–U16 universal inventory (copy to `~/.redteam/campaigns/<target>/state.json` and fill).
