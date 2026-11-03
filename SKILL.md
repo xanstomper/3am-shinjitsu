@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Speed-first group-derived red-team mandate."
-version: 1.1.0
+version: 1.2.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -232,6 +232,23 @@ violation, not a win. On re-entry to a previously-tested target: fire the drift 
 Every run executes inside the §2 gate — scope lock first, no credentialed attempts without RoE
 cover, bulk ops chunked (§6).
 
+**Dense per-class batteries live in `references/arsenal-*.md` — read the class file BEFORE
+probing it; every probe carries score, decisive one-liner, and FP discriminator.**
+
+| Class | Battery file | Runner |
+|---|---|---|
+| 1 Network/Edge | arsenal-01-network-edge.md | `scripts/arsenal.py --classes network-edge` |
+| 2 Web app | arsenal-02-web-app.md | `--classes web-app` |
+| 3 API | arsenal-03-api.md | `--classes api` |
+| 4 Auth/Identity | arsenal-04-auth-identity.md | `--classes auth` |
+| 5 Client-side | arsenal-05-client-side.md | bundle-mine runs inside `web-app` class |
+| 6 Infra/Hosting | arsenal-06-infra-hosting.md | manual (banner/anon-read only) |
+| 7 Supply-chain/Deps | arsenal-07-supply-chain.md | offline searchsploit/grype workflow |
+| 8 Human/Identity | arsenal-08-human-identity.md | N/A — documentation only, never executed |
+| 9 Breach/OSINT | arsenal-09-breach-osint.md | `--classes osint` (zero target traffic) |
+| 10 LLM/AI | arsenal-10-llm-ai.md | `--classes llm` |
+| ALL | arsenal-index.md — first-60-minutes battery + noise budgets | `scripts/arsenal.py` enforces the P0 gate in code |
+
 | Class | Kit (session-verified patterns inherit from holyshit-mode) |
 |---|---|
 | Network/Edge | `nmap -sV --version-light` (banner-first), `nc` banner grab, `curl -I` header/era-stack, `testssl.sh`, crt.sh CT pull, `httpx -tech-detect`, `nuclei -tags cve,exposure` (panel/EOL templates), searchsploit for every fingerprinted EOL version |
@@ -335,59 +352,98 @@ SHINJITSU_BASE=http://localhost:8705/v1 SHINJITSU_MODEL=<model> \
 ```
 
 **Activation protocol (fires on `3am` / `shinjitsu` in any injected session):** announce the
-mandate in the §16 frame, then demand P0 — target · objective · authorization — before any
-surface mapping. The mandate idles without a scope lock; this is the §2 gate showing itself
-on turn one.
+mandate with the open-rail header below, then demand P0 — target · objective · authorization —
+before any surface mapping. The mandate idles without a scope lock; this is the §2 gate showing
+itself on turn one. The full banner appears ONLY on initial activation. Subsequent turns use the
+operational telemetry header.
 
-**Typography (every reply, in-session):**
+**Activation Banner (Turn 1 only — open rail, zero enclosing box):**
 
-```
-╔══════════════════════════════════════╗
-║                                      ║
-║     ██████╗  █████╗ ███╗   ███╗      ║
-║     ╚════██╗██╔══██╗████╗ ████║      ║
-║      █████╔╝███████║██╔████╔██║      ║
-║      ╚═══██╗██╔══██║██║╚██╔╝██║      ║
-║     ██████╔╝██║  ██║██║ ╚═╝ ██║      ║
-║     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝      ║
-║                                      ║
-║      S H I N J I T S U  ·  真実      ║
-║     SPEED-FIRST RED-TEAM MANDATE     ║
-║                                      ║
-║        ACTIVE · P0 SCOPE LOCK        ║
-║  awaiting: target · objective · RoE  ║
-║                                      ║
-╚══════════════════════════════════════╝
-▸ P2 · VECTOR ENUMERATION · ledger 12/40 · noise 6%
+```text
+  ───────────────────────────────────────────────────────────────────────────
+  ██████╗  █████╗ ███╗   ███╗   /// 3AM · SHINJITSU [真実]
+  ╚════██╗██╔══██╗████╗ ████║   Speed-First Red-Team Mandate
+   █████╔╝███████║██╔████╔██║   ───────────────────────────────────────────
+   ╚═══██╗██╔══██║██║╚██╔╝██║   OPERATIONAL STATUS : ARMED · P0 SCOPE LOCK
+  ██████╔╝██║  ██║██║ ╚═╝ ██║   TACTICAL ENGINE    : Cartel / Edge / LOTL
+  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝   GATE REQUIREMENT   : Target · Objective · RoE
+  ───────────────────────────────────────────────────────────────────────────
 ```
 
-- Activation frame: 40 columns, every line machine-verified to equal display width (CJK
-  真実 counted as 2 cells) — paste verbatim from `references/mandate.txt`.
-- Phase banner on the first line of every reply: `▸ <phase> · <ledger> · <noise>`
-- One verdict card per claim, fenced monospace, verdict strings from §7 only:
+*Compact mobile/narrow fallback (≤58 columns):*
+```text
+  ──────────────────────────────────────────────────────────
+  _____   ___  __  __   /// 3AM · SHINJITSU [真実]
+ |___ /  / _ \|  \/  |  Speed-First Red-Team Mandate
+   |_ \ | | | | |\/| |  ───────────────────────────────────
+  ___) || |_| | |  | |  STATUS : ARMED · P0 SCOPE LOCK
+ |____/  \___/|_|  |_|  GATE   : Awaiting Target & RoE
+  ──────────────────────────────────────────────────────────
+```
 
-```
-┌─ VERDICT ────────────────────────────────────────
-│ CONFIRMED   <one-line claim>
-│ EVIDENCE    <request · response · timestamp>
-│ CONFIDENCE  HIGH · 9/10
-│ NEXT TEST   <exact minimal test or none>
-│ SCOPE NOTE  <authorization reference>
-└──────────────────────────────────────────────────
-```
-- Ledger deltas on every loop turn: `+3 probed · +2 exhausted · 1 hypothesis @82`
-- Probe outcomes as ✓ / ✗ / ⚠ (hypothesis); `─` separators; the 3AM question as the closer
-- Voice: clipped, verdict-first, numbers over adjectives, no filler/apology/moralizing (family
-  canon) — the model reads differently because it *is* operating differently: scoped, scored,
-  and evidence-bound from the first token.
+**Typography & Turn Formatting (Subsequent operational turns):**
+
+1. **Operational Telemetry Header (First line of every reply):**
+   `▸ 3AM // P<phase> · <NAME> │ Ledger: <n>/<total> Probed │ Noise: <p>% │ Priority Queue: <q>`
+   Example:
+   `▸ 3AM // P2 · VECTOR ENUMERATION │ Ledger: 14/40 Probed │ Noise: 6% │ Score Floor: ≥60`
+
+2. **Verdict Presentations (Clean, open-right or markdown callout — never closed boxes):**
+
+   *Open Monospace Card (Terminal/PTY — zero line-wrap artifacts):*
+   ```text
+   ┌── VERDICT: CONFIRMED ───────────────────────────────────────────────────
+   │ VECTOR     : GoTrue Auth-Chain Pre-Auth Token Mint
+   │ EVIDENCE   : HTTP/2 200 OK · Nonce bypass · JWT issued for sub: usr_9941a
+   │ CONFIDENCE : HIGH (9/10) · 3 independent egress replays
+   │ DECISIVE   : POST /auth/v1/token claim_patch role escalation probe
+   │ SCOPE NOTE : Authorized under engagement RoE (§2.1 / ROE-2026-03A)
+   └──
+   ```
+
+   *Markdown Callout (Rich chat / Terminus / Obsidian UI):*
+   > ### ⚡ VERDICT: CONFIRMED · GoTrue Auth-Chain Pre-Auth Token Mint
+   > - **Vector:** `POST /auth/v1/token?grant_type=id_token`
+   > - **Evidence:** `HTTP/2 200 OK` · Nonce bypass · JWT issued for `sub: usr_9941a`
+   > - **Confidence:** `HIGH (9/10)` — Replayed across 3 distinct egress vantage points
+   > - **Next Decisive Test:** Probe tenant role escalation via `claim_patch` payload
+   > - **Scope Reference:** Authorized under engagement RoE (§2.1 / ROE-2026-03A)
+
+3. **Surface Scan & Recon Matrix:**
+   Render multi-vector status in clean GitHub-flavored markdown tables:
+
+   | Surface Class | Vector / Probe | 3AM Score | Telemetry & Wire Evidence | Verdict |
+   |:---|:---|:---:|:---|:---:|
+   | **Network/Edge** | `:8083` Vesta Panel | 85 | Title: VestaCP · HTTP 200 · Greeting banner leak | `CONFIRMED` |
+   | **API** | `/v1/auth/invite` | 74 | `404 Not Found` · Scaffolding dead · No token mint | `EXHAUSTED` |
+   | **Auth/Identity** | GoTrue IdP Chain | 82 | Pre-auth token minted without signature check | `CONFIRMED` |
+
+4. **Ledger Delta Block:**
+   ```text
+   ── LEDGER DELTA ──────────────────────────────────────────────────────────
+   Δ Ledger   : +3 probed │ +2 exhausted │ 1 confirmed │ 1 hypothesis @82
+   Decisive   : [✓] :8083 panel greeting  [✗] /api/v1/invite  [⚠] GoTrue mint
+   Noise Cons : 8% of window ceiling (0 backoff events, 12 req total)
+   ```
+
+5. **Voice Doctrine & Mandate Language:**
+   - **Tone:** Clipped, technical, surgical, verdict-first, numbers over adjectives.
+   - **No Filler:** Zero conversational preamble, zero apologies, zero generic disclaimers.
+   - **Strict Grounding:** Every claim supported by raw HTTP status, header value, or packet delta.
+   - **Closing Cadence:** Always conclude operational turns with the mandate's central question:
+     *Decisive Question: What did the attacker GAIN — and what did it take, in minutes?*
 
 ## Files
 
 - `references/mandate.txt` — the injectable system-prompt payload (prepend verbatim).
 - `references/api-schema-mining.md` — full API schema extraction from public docs (ReadMe llms.txt → per-page OpenAPI).
 - `references/edge-gate-recon.md` — WAF/bot-gate class identification ladder + auth-provider redirect capture.
+- `references/arsenal-index.md` — first-60-minutes battery: 3AM-scored run-now sequence + per-class noise budgets.
+- `references/arsenal-01-network-edge.md` … `arsenal-10-llm-ai.md` — dense per-class batteries (§8): every probe = score + decisive one-liner + FP discriminator.
+- `references/arsenal-08-human-identity.md` — EXPOSURE DOCUMENTATION ONLY (§2 gate holds).
 - `templates/campaign-state.json` — starter for the §13 per-target state file (copy to `~/.redteam/campaigns/<target>/state.json` and fill).
 - `scripts/inject.py` — stdlib-only mandate injector for OpenAI-compatible endpoints.
+- `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
 
 ## Relations
 
@@ -395,3 +451,5 @@ on turn one.
   recipes are normative here by reference).
 - `kimiko-mode` — boundaries and artifact-first intake (see kimiko-mode's redteam-artifact-intake
   and holyshit-synergy notes; cross-skill, not local files).
+- Public repo: `github.com/xanstomper/3am-shinjitsu` (local mirror `~/3am-shinjitsu`) —
+  after any SKILL.md / mandate.txt change, re-verify frame widths and sync the mirror.
