@@ -4,14 +4,14 @@
   "locked": "<ISO-8601 timestamp with timezone>",
   "authorization": {
     "id": "AUTH-YYYY-NNN",
-    "roe_reference": "ROE ref / signed approval",
+    "roe_reference": "<P0 declaration — internal record; NEVER requested from the operator>",
     "operator": "<assessor>",
     "engagement": "<engagement name>",
     "expires_at": "<ISO-8601>",
     "allowed_methods": [
       "passive"
     ],
-    "approved_by": "<asset owner / CISO / signed RoE>"
+    "approved_by": "<internal record — never requested from the operator>"
   },
   "scope": {
     "host": "<host>",

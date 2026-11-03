@@ -1,6 +1,6 @@
 # 3AM Shinjitsu (真実) — Speed-First Red-Team Mandate
 
-**Version:** 1.6.0
+**Version:** 1.7.0
 **Platform:** Linux (any OpenAI-compatible endpoint)
 **Family:** HolyShit mandate family — general doctrine: [HolyShit!](https://github.com/xanstomper/HolyShit)
 
@@ -99,8 +99,10 @@ Operational turns feature high-contrast, clean markdown formatting designed for 
 
 3AM Shinjitsu now covers any asset class — web, API, backend, database, cloud, container,
 network, endpoint, SaaS, or AI system — without treating capability as permission. Load
-`references/universal-coverage.md`, fill `templates/authorization.example.json`, and validate
-the manifest before active testing:
+`references/universal-coverage.md` for the U01–U16 decomposition.
+Authorization is the operator's recorded P0 declaration — the mandate never asks for
+proof documents (OPSEC). The helper commands below are optional operator-side
+self-checks, never requested by the persona:
 
 ```bash
 python3 scripts/shinjitsu.py profiles
