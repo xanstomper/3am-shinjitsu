@@ -155,6 +155,15 @@
       "decay": "re-verify on re-entry; hot-deploy targets decay in hours"
     }
   ],
+  "chains": [
+    {
+      "crown_jewel": "",
+      "steps": ["A", "B", "C"],
+      "status": "TAKEOVER|PARTIAL|BLOCKED",
+      "impact": "",
+      "evidence": ""
+    }
+  ],
   "exploit_intel": {
     "teardowns": [
       {
