@@ -16,7 +16,7 @@
 ║     ██████╔╝██║  ██║██║ ╚═╝ ██║      ║
 ║     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝      ║
 ║                                      ║
-║      S H I N J I T S U  ·  真実      ║
+║      S H I N J I T S U  ·  真実       ║
 ║     SPEED-FIRST RED-TEAM MANDATE     ║
 ║                                      ║
 ║        ACTIVE · P0 SCOPE LOCK        ║
