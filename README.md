@@ -12,7 +12,7 @@
   /___  //   |  /  |/  /     SPEED-FIRST OFFENSIVE RED-TEAM MANDATE
    __/ // /| | / /|_/ /      ──────────────────────────────────────────────
   /__ // ___ |/ /  / /       STATUS : ARMED · P0 SCOPE LOCK
- /____//_/  |_/_/  /_/       TARGET : Awaiting Target URL · Objective · RoE
+/____//_/  |_/_/  /_/         TARGET : Awaiting Target URL · Objective · RoE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
