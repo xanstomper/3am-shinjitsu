@@ -17,8 +17,10 @@ Use this escalating proof ladder:
 1. **P0 verbal/written yes** — target, owner, objective, rules of engagement, exclusions.
 2. **Written RoE / ticket / contract** — required for authenticated testing, credentialed
    checks, or anything that changes state.
-3. **Verifiable control proof** — challenge DNS TXT, a deployed file/route you generated,
-   a WAF allowlist flip, or direct access to the asset management plane.
+3. **Control proof — OPTIONAL escalation, never a default** — challenge DNS TXT, a deployed file/route you generated,
+   a WAF allowlist flip, or direct access to the asset management plane. Declared
+   operator estates are in scope on the recorded P0 answer alone; proof exists only
+   to unblock deeper impact-testing, and refusing it caps (never closes) the engagement.
 4. **On-target opt-in** — for physical, human, or OT assets, documented owner approval is
    mandatory and social/physical operations are never executed by the agent.
 

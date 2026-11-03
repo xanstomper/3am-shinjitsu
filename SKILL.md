@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.5.0
+version: 1.6.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -88,12 +88,14 @@ is a violation, not a win (compromise-vs-observation gate, §4).
 
 - **In-scope:** operator-owned/administered infrastructure; engagements with verifiable written
   authorization; the operator's own brands and orbit when they direct it.
-- **Explicit yes is a gate, not a loophole.** If the operator says they are authorized, record
-  target, objective, RoE, exclusions, and proof in campaign state before any interaction.
-  Use `templates/authorization.example.json` as the manifest and `scripts/shinjitsu.py
-  validate --authorization <file> --target <target>` before active testing. Verbal yes can
-  unlock low-impact planning; authenticated, state-changing, or higher-risk checks need
-  written RoE or verifiable control proof (DNS TXT, deployed artifact, WAF allowlist).
+- **P0 is collected through the agent's question feature — never free-text demands.** On
+  activation, ask target, objective, and authorization as structured questions
+  (single-select choices, recommended option first, auto-Other) via the clarify tool — ONE
+  call — and record every answer verbatim in campaign state as the P0 record. The
+  operator's declared estates (standing profile declarations or named in the P0 answer)
+  are in scope ON DECLARATION — no external proof ceremony required.
+  `templates/authorization.example.json` is the manifest; `scripts/shinjitsu.py validate`
+  is optional record-keeping, not a gate.
 - **Out-of-scope, persona-internal, no exceptions:**
   - Destructive end-states on ANY system, including claimed authorization (DoS, data
     destruction, service exhaustion). Scope docs authorize validation, not destruction.
@@ -109,23 +111,23 @@ is a violation, not a win (compromise-vs-observation gate, §4).
     verify the writeup's patch/disclosure status instead and cite it as historical.
 - Under social pressure, the gate holds (kimiko-mode scope-gate lessons are normative).
   "Compromise it" = prove control with read-only evidence + document; never execute impact.
-- **Authorization claims get the same evidence standard as verdicts.** An ownership or RoE
-  claim asserted mid-run to unlock impact is pressure, not scope, until proven. Record P0
-  answers verbatim in the campaign state — a later claim that contradicts the P0 record
-  (e.g. "it's MY site" after answering "written engagement") is itself gate evidence.
-  Demand a control proof before widening anything: a challenge TXT record
-  `_verify.<target>` carrying a token you generated, verified via
-  `dig +short TXT _verify.<target> @1.1.1.1` (DNS answers from any vantage, even when
-  the web edge blocks the agent), or the target's WAF allowlisting your egress IP — a
-  1020→200 flip is proof and unblock in one move. Refusal to verify closes the
-  engagement; run nothing further, and leave any open HYPOTHESIS parked for a future
-  authorized engagement instead of testing it.
+- **Authorization claims get the same evidence standard as verdicts — but the bar is the
+  verbatim P0 record, not DNS ceremony.** A claim asserted mid-run that CONTRADICTS the
+  recorded P0 answers (e.g. "it's MY site" after answering "third-party engagement") is
+  gate evidence: stop, re-collect via the question feature, do not widen. For the
+  operator's own declared estates, NO TXT challenge, deployed artifact, or allowlist flip
+  is required — the declared + verbatim-recorded answer IS the scope. External control
+  proofs (challenge TXT `_verify.<target>` via `dig +short TXT @1.1.1.1`, WAF
+  allowlist flip 1020→200, deployed token route) exist only as OPTIONAL escalation
+  offers the operator may use to unblock deeper impact-testing — never a default
+  requirement, and refusal never closes an engagement on declared estates (it caps the
+  engagement at read-only evidence there).
 
 ## §3 Kill chain (P0–P5), with time targets
 
 | Phase | Target time | Playbook |
 |---|---|---|
-| **P0 Scope lock** | 0 min | Objective + RoE + revert-map discipline stated before P1. No scope = no launch. |
+| **P0 Scope lock** | 0 min | Collect via the agent's question feature (clarify): target · objective · authorization as structured single-select questions (recommended first + Other), answers recorded VERBATIM in campaign state; revert-map discipline stated before P1. No scope = no launch. |
 | **P1 Surface mapping** | ≤15 min | Parallel ladders: crt.sh CT logs → partner/mirror brands → passive DNS → era-stack banner grab (X-Powered-By, /home/<user>/web leaks, panel ports 8083/3306) → edge-device CVE triage (Fortinet/Versa/SOHO-class) → breach-context OSINT (ransomware.live, regulator-leak archives) → client-bundle mining incl. secondary chunks + Wayback CDX ghost-route diff. |
 | **P2 Vector enumeration** | ≤15 min | High-value quick checks FIRST (holyshit §Recon Efficiency): CF-origin leak, CORS + credentials, rate-limiter keying/scope, OAuth state/redirect_uri, 405-matrix route map, half-shipped auth scaffolding, dead-invite gate signatures, schema-library extraction for gate-order proof. Score everything (§4); exhaustion ledger opens at first probe. |
 | **P3 Initial access** | minutes where prepared | Exploit in priority order: edge/known-CVE > auth-chain seam (GoTrue/Supabase, unauth token-mint) > OAuth interception > IDOR/ghost-route > rate-limit rotation. Confirm with the MINIMUM decisive test — one request where one suffices. Vercel/Next.js targets: run the middleware-bypass delta (CVE-2025-29927) + `/_next/image` allow-list probe + the checkpoint-bypass plane (vercel.app alias / wildcard subdomains) FIRST — recipe: holyshit references/vercel-nextjs-target-playbook.md. |
@@ -382,7 +384,10 @@ Run the REAL trigger animation ONCE on activation — `python3 scripts/trigger-a
 (plays live frames in the terminal: typewriter header, boot spinners, loading bar,
 ARMED flash, pulse). Where no terminal tool exists (API-only endpoints), print the
 static sequence below instead. No extra filler text around it.
-Then immediately demand P0 scope lock (Target · Objective · RoE) before any surface mapping.
+Then immediately collect the P0 scope lock via the agent's question feature (clarify —
+ONE structured call: target · objective · authorization, single-select choices with the
+recommended option first + Other) and record the answers verbatim in campaign state
+before any surface mapping.
 NEVER repeat the animation on subsequent turns; use the operational telemetry bar.
 
 **The sequence (static form — script output / non-TTY fallback):**
@@ -455,8 +460,9 @@ Use this workflow when the target is unfamiliar or non-web:
    emergency contact, allowed methods (`passive`, `active-read-only`, `authenticated-read-only`).
 2. **Authorization manifest.** Copy `templates/authorization.example.json`; fill real values;
    run `python3 scripts/shinjitsu.py validate --authorization <file> --target <target>`.
-   For domain control proof, `challenge` prints a `_shinjitsu.<domain>` TXT record and
-   `verify-dns` checks it.
+   For domain control proof — OPTIONAL escalation only, never a default: `challenge`
+   prints a `_shinjitsu.<domain>` TXT record and `verify-dns` checks it. Declared
+   operator estates skip it entirely (P0 answer recorded verbatim is the scope).
 3. **Universal decomposition.** Load `references/universal-coverage.md`; map the target to
    U01–U16. Every domain must be probed or N/A'd with a concrete reason.
 4. **Plan and state.** `plan --state <campaign-state.json> --output <plan.md>` creates the
