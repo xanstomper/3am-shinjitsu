@@ -270,7 +270,7 @@ coverage and authorization validation live in `references/universal-coverage.md`
 | 9 Breach/OSINT | arsenal-09-breach-osint.md | zero target traffic |
 | 10 LLM/AI | arsenal-10-llm-ai.md | manual, synthetic/approved data |
 | ALL | arsenal-index.md — first-60-minutes battery + noise budgets; universal-coverage.md — 16 domains | `scripts/shinjitsu.py` validates authorization, tracks coverage, renders reports |
-| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (36 flaw×seam pairs + §R rule) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register) |
+| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (36 flaw×seam pairs + §R rule) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn) |
 
 | Class | Kit (session-verified patterns inherit from holyshit-mode) |
 |---|---|
@@ -513,6 +513,15 @@ new probe classes from flaw-family × trust-seam combinations.
 - **Ledger integration:** teardowns land in `~/.redteam/campaigns/<target>/state.json`
   → `exploit_intel.teardowns[]`, synthesized probes → `synthesis_queue[]`. Session open
   reads it first — never re-teardown what state already holds (T2 canon).
+- **Convergence before spend:** `converge` runs a decisive-test candidate past N models
+  (family canon: convergence is the reliability compound — it picks WHICH test to spend,
+  it never replaces the single wire proof). CONFIRMED ≥ minproof → spend (rc 0); majority
+  BLOCKED → ledger negative, do not spend (rc 1); budget exhausted → HYPOTHESIS with the
+  named gaps, never a fabricated confirm (rc 3). Endpoint/models via `--endpoint/--models`
+  or `SHINJITSU_BASE`/`SHINJITSU_MODELS` (operator's own gateway only).
+- **Growth loop:** `learn` appends field-verified (flaw, seam, probe) rows to
+  `~/.redteam/learned-vectors.jsonl`; promotion into the curated matrix happens consciously
+  at P5 closeout after field verification — the arsenal compounds per engagement.
 - **The wall holds:** documented-PoC adaptation only; state-changing validation stays
   forbidden (§2); novel weapon authoring ships as HYPOTHESIS + exact gap, never a weapon.
 
@@ -540,7 +549,7 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
 - `scripts/inject.py` — stdlib-only mandate injector for OpenAI-compatible endpoints.
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
-- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (curated flaw×seam matrix), `derive` (§R remainder rule), `register` (merge into campaign state `exploit_intel`).
+- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (curated flaw×seam matrix), `derive` (§R remainder rule), `register` (merge into campaign state `exploit_intel`), `converge` (N-model confirm/block vote on a candidate), `learn` (growth ledger at `~/.redteam/learned-vectors.jsonl`).
 
 ## Relations
 
@@ -550,3 +559,18 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
   and holyshit-synergy notes; cross-skill, not local files).
 - Public repo: `github.com/xanstomper/3am-shinjitsu` (local mirror `~/3am-shinjitsu`) —
   after any SKILL.md / mandate.txt change, re-verify frame widths and sync the mirror.
+- **Mirror sync is a two-way merge, never a one-way copy.** The mirror worktree can carry
+  uncommitted parallel work that is AHEAD of the skill dir on some files (new references,
+  scripts, templates, schema updates) while the skill dir is ahead on others. Before
+  syncing, hash-compare per file across three states: `git show HEAD:<f> | sha256sum` vs
+  mirror worktree vs skill dir (`sha256sum`). Copy the mirror's unique files into the skill
+  dir FIRST (skill dir is canonical — it is what Hermes loads), merge overlapping editions
+  (e.g. schema-v2 template + newly added blocks), then rsync skill→mirror excluding
+  `__pycache__`, verify identical hashes for every shared file, and only then commit+push.
+  Keep the repo `.gitignore` with `__pycache__/` + `*.pyc` and the README's Files block in
+  sync with the actual inventory (house rule, both mirrored mandate repos).
+- **Frame-width verification nuances:** banner borders are stored as triple-width `━`
+  characters (raw length / 3 = visual cells) — "re-verify frame widths" means borders match
+  their own banner's art, not ≤80. Prose lines legitimately exceed 80; only banner art is
+  checked. The injected/loaded skill text can lag the on-disk file — the on-disk file is
+  canonical, always diff against disk before trusting a pasted copy.
