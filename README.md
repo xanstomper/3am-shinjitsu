@@ -1,6 +1,6 @@
 # 3AM Shinjitsu (真実) — Speed-First Red-Team Mandate
 
-**Version:** 1.8.0
+**Version:** 1.9.0
 **Platform:** Linux (any OpenAI-compatible endpoint)
 **Family:** HolyShit mandate family — general doctrine: [HolyShit!](https://github.com/xanstomper/HolyShit)
 
@@ -173,8 +173,9 @@ scripts/trigger-anim.py          REAL activation animation (TTY frames; static f
 scripts/shinjitsu.py              authorization validation, plan/state/report helper
 scripts/arsenal.py               read-only battery runner (P0 gate in code, noise budgets)
 scripts/exploit-intel.py         exploit loop CLI (teardown, synthesize, derive, register,
-                                 converge, learn, drift, status, next, report, promote)
+                                 converge, learn, drift, status, next, report, promote, chain)
 scripts/matrix.json              runtime synthesis matrix (grows via promote)
+references/takeover-batteries.md T1–T7 takeover classes + chain certification
 ```
 
 ## Relations

@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.8.0
+version: 1.9.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -279,7 +279,8 @@ coverage and authorization validation live in `references/universal-coverage.md`
 | 9 Breach/OSINT | arsenal-09-breach-osint.md | zero target traffic |
 | 10 LLM/AI | arsenal-10-llm-ai.md | manual, synthetic/approved data |
 | ALL | arsenal-index.md — first-60-minutes battery + noise budgets; universal-coverage.md — 16 domains | `scripts/shinjitsu.py` validates authorization, tracks coverage, renders reports |
-| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (36 flaw×seam pairs + §R rule) + scripts/matrix.json (runtime-grown) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn/drift/status/next/report/promote) |
+| 0 Study/Synthesis | exploit-intelligence-engine.md (study/breakdown/adaptation) + vector-synthesis-matrix.md (59 flaw×seam pairs incl. universal classes + §R rule) + scripts/matrix.json (runtime-grown) | `scripts/exploit-intel.py` (teardown/synthesize/derive/register/converge/learn/drift/status/next/report/promote/chain) |
+| T Takeover/Expansion | takeover-batteries.md — T1..T7 takeover classes, validation-only decisive proofs, pivot inputs, chain certification | `scripts/exploit-intel.py chain` (record A→B→C:TAKEOVER) |
 
 | Class | Kit (session-verified patterns inherit from holyshit-mode) |
 |---|---|
@@ -523,9 +524,10 @@ new probe classes from flaw-family × trust-seam combinations.
   `next` (ranked actionable queue — TEST/PROBE/RE-VERIFY/COVER, negatives excluded) →
   `converge` (N-model validation) → single decisive test → `register` (wire result) →
   `learn` (growth row) → `promote --apply --verified` (row merges into `scripts/matrix.json`,
-  `.bak` backup taken) → `synthesize` emits it next run → `report` (P5 deliverable, ranked
-  confirmed > hypothesis > negatives). The loop has no iteration bound and no end state but
-  T1/T2 — it compounds per engagement.
+  `.bak` backup taken) → `synthesize` emits it next run → `chain` (certify the expansion
+  A→B→C:TAKEOVER once decisive proofs land) → `report` (P5 deliverable, ranked
+  confirmed > hypothesis > negatives + takeover chains). The loop has no iteration
+  bound and no end state but T1/T2 — it compounds per engagement.
 - **Convergence before spend:** `converge` runs a decisive-test candidate past N models
   (family canon: convergence is the reliability compound — it picks WHICH test to spend,
   it never replaces the single wire proof). CONFIRMED ≥ minproof → spend (rc 0); majority
@@ -548,6 +550,32 @@ learn · drift · status · next · report · promote). Matrix runtime file: `sc
 Load the engine file BEFORE the first battery run of any engagement — it is the layer
 that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable step.
 
+## §19 Takeover & Lateral Expansion — from foothold to crown jewels
+
+First compromise is not the objective — it is the door. After ANY confirmed primitive,
+run OP-ESCALATE (consumer hunt); on landing a foothold, the takeover batteries drive
+expansion until a certified TAKEOVER chain or a named wall:
+
+- **Seven takeover classes** (`references/takeover-batteries.md`): T1 identity (user /
+  admin / tenant-IdP), T2 web-app tenant, T3 host, T4 cloud account, T5
+  container/cluster, T6 device/fleet, T7 collab/SaaS — each with the decisive
+  validation-only proof (one authentication success, one read-only call) and the
+  pivot inputs the foothold yields.
+- **Chain certification:** every hop is a confirmed primitive; the chain is recorded
+  `A→B→C:TAKEOVER|PARTIAL|BLOCKED` via `scripts/exploit-intel.py chain` and rendered
+  in the P5 report. TAKEOVER only when the final hop's proof landed; PARTIAL names the
+  missing impact-gate; BLOCKED names the exact gap.
+- **Validation-only, no exceptions:** persistence is NEVER installed — proof is the
+  path existing (auth success, capability check, one read). No destructive end-states,
+  no data movement, LOTL one-command reads. External dangling-domain registration /
+  third-party tenant app-install are third-party actions — operator-owned records only,
+  everything else ships as documented feasibility.
+- Takeover loop cadence: primitive → consumer hunt → foothold → applicable T-class →
+  decisive proof → chain hop → re-score remaining expansion vectors → next hop or
+  TAKEOVER. Negatives are hops too — ledgered with the exact test, never re-probed.
+
+Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py chain`.
+
 ## Files
 
 - `references/mandate.txt` — the injectable system-prompt payload (prepend verbatim).
@@ -559,6 +587,7 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
 - `references/arsenal-08-human-identity.md` — EXPOSURE DOCUMENTATION ONLY (§2 gate holds).
 - `references/exploit-intelligence-engine.md` — Exploit Study & Synthesis Engine (§18): the five-gene exploit model (T/P/R/G/Δ), patch-diff-first teardown protocol, CVE→vector translation table, six synthesis operators, adaptation discipline (no Δ = no test), ledger schema.
 - `references/vector-synthesis-matrix.md` — the operational synthesis battery: 20 flaw families × 15 trust seams → 59 curated high-yield probe pairs (incl. the universal-class battery for cloud/network/database/mobile/firmware/wireless/collab/operational planes), each with confirmed-when + field-proven correlate, plus the §R remainder rule for mechanical derivation of unlisted pairs.
+- `references/takeover-batteries.md` — Takeover & Lateral Expansion (§19): T1–T7 takeover classes (identity/web-tenant/host/cloud/cluster/fleet/collab), validation-only decisive proofs, pivot inputs, chain certification rules (A→B→C:TAKEOVER).
 - `templates/authorization.example.json` — optional INTERNAL record template (operator-side self-check only; never requested by the persona — the recorded P0 declaration is the gate).
 - `templates/assessment-report.md` — report skeleton used by the universal workflow.
 - `templates/campaign-state.json` — schema-v2 starter with the U01–U16 universal inventory (copy to `~/.redteam/campaigns/<target>/state.json` and fill).
@@ -567,7 +596,7 @@ that turns the §1 cartel shortcut (known CVE on exposed edge) into a repeatable
 - `scripts/trigger-anim.py` — the REAL activation animation (Terminal tool on Turn 1): typewriter header, boot spinners, loading bar, ARMED flash, pulse. Non-TTY → prints the static sequence. `NO_COLOR=1` / `3AM_FAST=1` env knobs.
 - `scripts/shinjitsu.py` — stdlib-only authorization validator, DNS control-proof helper, universal plan/state/report tool. It does not scan or exploit targets.
 - `scripts/arsenal.py` — read-only battery runner: P0 scope gate enforced in code, per-class noise budgets, --max-reqs cap, JSONL ledger output.
-- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue), `report` (P5 deliverable), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken).
+- `scripts/exploit-intel.py` — Exploit Intelligence CLI: `teardown <CVE|kw>` (searchsploit → MITRE/NVD fallback → five-gene teardown JSON), `synthesize` (matrix, runtime-grown via `scripts/matrix.json` or `SHINJITSU_MATRIX`), `derive` (§R rule), `register` (campaign state), `converge` (N-model vote), `learn` (growth JSONL), `drift` (baseline re-verify + wayback + PTOK), `status`/`next` (read-back + ranked queue), `report` (P5 deliverable incl. takeover chains), `promote --apply --verified` (merge field-verified rows into the matrix, backup taken), `chain` (certify A→B→C:TAKEOVER|PARTIAL|BLOCKED).
 - `scripts/matrix.json` — the runtime synthesis matrix (grows via `promote`; regenerated from the curated markdown when needed).
 
 ## Relations

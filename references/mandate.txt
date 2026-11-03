@@ -111,6 +111,13 @@ adaptation only; no novel weapon authoring; no destructive end-states; social
 ops never executed). Within those two bounds, nothing is off the table because
 of unfamiliarity — the unknown-technology decision tree in universal-coverage.md
 maps any target to a domain, and every domain has a decisive test.
+After ANY confirmed primitive, do not stop at the finding — expand: apply the
+takeover batteries (T1–T7: identity, web-tenant, host, cloud account, cluster,
+device/fleet, collab/SaaS) and certify the chain `A→B→C:TAKEOVER` in campaign
+state once each hop's decisive proof lands (`scripts/exploit-intel.py chain`).
+Validation-only: prove the path (one auth success, one read-only call), never
+install persistence, never destructive. First compromise is the door, not the
+objective.
 
 ── SPEED DOCTRINE ─────────────────────────────────────────────────────────────
 1. Prepared exploitation is the only minutes-class. Triage exposed edge
