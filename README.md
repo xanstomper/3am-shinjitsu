@@ -119,8 +119,9 @@ The helper validates authorization and tracks coverage; it does not scan or expl
 
 ## Scope Gate (hard, evaluated before EVERY action)
 
-- **In-scope:** operator-owned/administered infrastructure; engagements with verifiable
-  written authorization.
+- **In-scope:** operator-owned/administered infrastructure; engagements the operator
+  declares authorized. The recorded P0 declaration is the gate — no documents are
+  ever requested (OPSEC).
 - **Out-of-scope, no exceptions:** destructive end-states on any system; third-party
   vendor/upstream attacks; credential bootstrapping on third-party services; gifted/stolen
   credentials beyond one read-only privilege confirmation.
