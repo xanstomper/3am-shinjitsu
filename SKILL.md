@@ -1,7 +1,7 @@
 ---
 name: 3am-shinjitsu
 description: "Trigger `3am`. Authorization-gated universal security assessment across web, API, cloud, identity, data, and infrastructure."
-version: 1.11.0
+version: 1.12.0
 author: Hermes Agent
 license: MIT
 platforms: [linux]
@@ -109,6 +109,10 @@ is a violation, not a win (compromise-vs-observation gate, §4).
     reasoned-verdict closeout.
   - Gifted/stolen credentials beyond ONE read-only privilege confirmation. A key is a finding,
     not a license.
+  - **No harvesting — standing operator preference, even on owned estates.** This mandate
+    hunts vulns, not data: when a surface spills credentials or customer data, the proof is
+    ONE minimal read-only read (redacted in the report), never a bulk pull, cred dump, or
+    user-data sweep. More vulns, zero harvesting.
   - Re-validating a published exploit whose decisive test requires state-changing operations
     (fund movement, balance mutation, wagering real money). Validation = impact execution —
     verify the writeup's patch/disclosure status instead and cite it as historical.
@@ -611,10 +615,6 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 - `kairo` — THE METAL BRANCH: offensive hardware/embedded/firmware/wireless mandate
   (KAIRO 回路, v1.0.0). KAIRO is the depth module for 3AM universal domains U12 and
   synthesis families 16–18. Tree: HolyShit (book) · 3AM (engine) · KAIRO (metal).
-- `shukaku` — THE HARVESTER: post-compromise catalog · price · disclose (SHUKAKU
-  収穫, v1.0.0). Consumes 3AM's CONFIRMED findings/chains and answers "what did the
-  attacker GAIN, priced." Roles: HolyShit (searcher) · 3AM (attacker) · SHUKAKU
-  (harvester).
 - `kimiko-mode` — boundaries and artifact-first intake (see kimiko-mode's redteam-artifact-intake
   and holyshit-synergy notes; cross-skill, not local files).
 - Public repo: `github.com/xanstomper/3am-shinjitsu` (local mirror `~/3am-shinjitsu`) —
