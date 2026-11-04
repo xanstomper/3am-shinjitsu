@@ -586,6 +586,7 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 ## Files
 
 - `references/mandate.txt` — the injectable system-prompt payload (prepend verbatim).
+- `references/session-lessons-cf-walled-estates.md` — session-verified recipes for CF-walled estates: WAF-exempt static-prefix lane, `/_next/image` status oracle, engine.io zero-auth probe, AMQP/EPMD battery, honest downgrade + owner-report framing.
 - `references/api-schema-mining.md` — full API schema extraction from public docs (ReadMe llms.txt → per-page OpenAPI).
 - `references/edge-gate-recon.md` — WAF/bot-gate class identification ladder + auth-provider redirect capture.
 - `references/universal-coverage.md` — U01–U16 decomposition for any asset class, authorization ladder, unknown-tech decision tree, per-domain decisive-test compromise battery, evidence rules.
@@ -612,9 +613,10 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 
 - `holyshit-mode` — the general doctrine this speed-mandate inherits from (its session-verified
   recipes are normative here by reference). *The book.*
-- `kairo` — THE METAL BRANCH: offensive hardware/embedded/firmware/wireless mandate
-  (KAIRO 回路, v1.0.0). KAIRO is the depth module for 3AM universal domains U12 and
-  synthesis families 16–18. Tree: HolyShit (book) · 3AM (engine) · KAIRO (metal).
+- `kairo` — THE SYNTHESIZER (v2.0.0): ingests every mandate's findings, synthesizes
+  attacks (8 documented technique classes + five-gene + operators), compiles them
+  per consumer, distributes in one shot — `kairo distribute` feeds 3AM's matrix
+  directly. Hardware/embedded is one of its synthesis domains.
 - `kimiko-mode` — boundaries and artifact-first intake (see kimiko-mode's redteam-artifact-intake
   and holyshit-synergy notes; cross-skill, not local files).
 - Public repo: `github.com/xanstomper/3am-shinjitsu` (local mirror `~/3am-shinjitsu`) —
@@ -636,4 +638,4 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
   canonical, always diff against disk before trusting a pasted copy.
 - `shiki` — THE COMMAND MANDATE (SHIKI 指揮, v1.0.0): binds HolyShit + 3AM + KAIRO into one coordinated attack — estate → lanes → dispatch → joint fire-list → re-task on CONFIRMED. Every branch attacks; SHIKI makes them attack together.
 - Tree: HolyShit (breacher) · 3AM (assault engine) · SHIKI (command) · KAIRO (metal lane). Every branch attacks; SHIKI makes them attack together.
-- `kenshi` — THE BLADE (KENSHI 剣士, v1.0.0): attacks the target's custom surface (bespoke code, shadow endpoints, business logic, crafted PoCs). Handoff: 3AM BLOCKED verdicts → KENSHI; KENSHI CONFIRMED vectors → 3AM learn/promote.
+- `undercroft` — THE UNDERCROFT (v2.0.0): attacks the hidden level beneath ANY system's documented surface — bespoke code, shadow endpoints, rules/value flows, crafted PoCs. Handoff: 3AM BLOCKED verdicts → undercroft; undercroft CONFIRMED vectors → 3AM learn/promote.
