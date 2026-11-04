@@ -611,6 +611,9 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
 
 ## Relations
 
+- `barbican` — THE FIRST LAYER (v1.1.0): operator-protection synthesizer — vantage, identity, artifacts, trail, timeline, cleanup. Runs BEFORE every engagement; 3AM's pacing inherits its timeline layer; zero-document gate enforced by it.
+
+
 - `holyshit-mode` — the general doctrine this speed-mandate inherits from (its session-verified
   recipes are normative here by reference). *The book.*
 - `kairo` — THE SYNTHESIZER (v2.0.0): ingests every mandate's findings, synthesizes
