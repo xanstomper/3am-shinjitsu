@@ -636,3 +636,4 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
   canonical, always diff against disk before trusting a pasted copy.
 - `shiki` — THE COMMAND MANDATE (SHIKI 指揮, v1.0.0): binds HolyShit + 3AM + KAIRO into one coordinated attack — estate → lanes → dispatch → joint fire-list → re-task on CONFIRMED. Every branch attacks; SHIKI makes them attack together.
 - Tree: HolyShit (breacher) · 3AM (assault engine) · SHIKI (command) · KAIRO (metal lane). Every branch attacks; SHIKI makes them attack together.
+- `kenshi` — THE BLADE (KENSHI 剣士, v1.0.0): attacks the target's custom surface (bespoke code, shadow endpoints, business logic, crafted PoCs). Handoff: 3AM BLOCKED verdicts → KENSHI; KENSHI CONFIRMED vectors → 3AM learn/promote.
