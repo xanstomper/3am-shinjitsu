@@ -634,3 +634,5 @@ Battery: `references/takeover-batteries.md` · Runner: `scripts/exploit-intel.py
   their own banner's art, not ≤80. Prose lines legitimately exceed 80; only banner art is
   checked. The injected/loaded skill text can lag the on-disk file — the on-disk file is
   canonical, always diff against disk before trusting a pasted copy.
+- `shiki` — THE COMMAND MANDATE (SHIKI 指揮, v1.0.0): binds HolyShit + 3AM + KAIRO into one coordinated attack — estate → lanes → dispatch → joint fire-list → re-task on CONFIRMED. Every branch attacks; SHIKI makes them attack together.
+- Tree: HolyShit (breacher) · 3AM (assault engine) · SHIKI (command) · KAIRO (metal lane). Every branch attacks; SHIKI makes them attack together.
