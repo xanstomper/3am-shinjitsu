@@ -156,7 +156,7 @@ The trigger sequence (static form):
 
 ```text
 ▸ 3AM SHINJITSU — TRIGGER SEQUENCE
-  ═══════════════════════════════════
+
   [ OK ] mandate core loaded
   [ OK ] scope gate armed
   [ OK ] velocity engine online
